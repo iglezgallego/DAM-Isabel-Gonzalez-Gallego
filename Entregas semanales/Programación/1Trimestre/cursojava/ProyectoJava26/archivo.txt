@@ -1,0 +1,14 @@
+Pepito|Grillo|pepitogrillo@email.com|786959
+Sofia|Reguillos|sofi@correo.com|123454677
+Rita|Ruiz|rita@email.com|651478
+Joaquin|Romero|jo@mail.com|63548
+isa|glez|isa@glez.com|65248
+Nombre|Apellidos|isa@gmail.com|Telefono
+delete|Apellidos|ihnf@ndh.com|Telefono
+lala|lalala|lala@gmail.com|65784124
+delete|lala|ijh@email.com|654789512
+Juan|Garcia|gh@mail.com|658471265
+Isabel|Gonzalez|iglez@gmail.com|660678685
+||k?¿?.jm|6185474212
+||lalalala|660678685
+||lalala|654121212
