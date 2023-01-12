@@ -1,0 +1,207 @@
+@font-face {
+  font-family: mythias;
+  src: url("fuente/mythias.otf");
+}
+@font-face {
+  font-family: magical;
+  src: url("fuente/magical.ttf");
+}
+
+/*
+    Hola que tal
+*/
+/*
+    selector{
+    propiedad:valor;   
+    propiedad:valor;
+    propiedad:valor;
+    ....
+    
+    }
+
+*/
+/*
+    El selector se puede escribir de forma diferente:
+    palabra suelta --> etiqueta
+    almohadilla -----> id
+    punto -----------> clase 'class'
+*/
+
+/* ////////// ESTILOS GENERALES ///////// */
+
+p,h3,h4,h5,h6,p,ul,li{
+    color:rgb(30,30,30);
+    margin:0px;
+    padding:0px;
+}
+
+
+header, main, footer{
+    width:800px;
+    margin:auto;
+    background:rgb(254,254,254);
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:25px;
+}
+
+
+body{
+    background:rgb(220,220,220);
+    font-family:serif;
+}
+
+/* ////////// ESTILOS GENERALES ///////// */
+
+/* ////////// ESTILOS CABECERA ///////// */
+
+#imagenlogo{
+    float:left;
+}
+
+h1{
+    color:rgb(0,0,128);
+    margin:0px;
+    padding:0px;
+    font-family:mythias;
+    font-size:50px;
+    border-bottom: 1px solid black;
+}
+
+h2{
+    color:rgb(147,112,219);
+    margin:10px;
+    padding-bottom:20px;
+    font-family:magical;
+    font-size:20px;
+}
+
+/* ////////// ESTILOS CABECERA ///////// */
+
+/* ////AQUI VOY A TRABAJAR CON EL MENÚ///////// */
+
+
+nav ul li a{
+    text-decoration:none;
+    color:inherit;
+    
+}
+
+nav ul{
+    padding:0px;
+    margin:0px;
+        
+}
+
+nav ul li{
+    padding:3px;
+    margin:2px;
+    list-style-type: none;
+    float:left;
+    background:darkslateblue;
+    color:cornsilk;
+    text-transform:uppercase;
+    width:70px;
+    font-size:10px;
+    text-align:center;
+    border-radius: 15px 0px 15px 0px;
+    transition:all 1s;
+}
+
+.clearfix{
+    clear:both;
+}
+
+nav ul li:nth-child(2){
+    border-radius:0px 15px 0px 15px;
+}
+nav ul li:nth-child(4){
+    border-radius:0px 15px 0px 15px;
+}
+nav ul li:nth-last-child(2){
+    border-radius:0px 15px 0px 15px;
+}
+nav ul li:hover{
+    background:cornsilk;
+    color:darkslateblue;
+}
+/* ////AQUI VOY A TRABAJAR CON EL MENÚ///////// */
+
+/* ////AQUI VOY A TRABAJAR CON EL CARRUSEL///////// */
+
+#carousel #contenedorcarrusel .diapositiva img{
+    width:100%;
+}
+
+#carousel #contenedorcarrusel .diapositiva{
+    width: 800px;
+    height:800px;
+    float:left;
+}
+
+#contenedorcarrusel{
+    width:800px;
+    height:480px;
+    overflow:hidden;
+}
+
+#mascara{
+    width:4800px;
+    height:800px;
+    animation:mueve 20s;
+    animation-iteration-count:infinite;
+    position:relative;
+}
+
+@keyframes mueve{
+    0%{right:0px;}
+    10%{right:0px;}
+    20%{right:800px;}
+    30%{right:800px;}
+    40%{right:1600px;}
+    50%{right:1600px;}
+    60%{right:2400px;}
+    70%{right:2400px;}
+    80%{right:3200px;}
+    90%{right:3200px;}
+    100%{right:4000px;}
+    }
+
+/* ////AQUI VOY A TRABAJAR CON EL CARRUSEL///////// */
+
+/* ////BLOG EN LA PAGINA PRINCIPAL///////// */
+
+#blog article{
+    width:100%;
+}
+
+#blog article img{
+    width: 250px;
+}
+
+#blog article .contienearticulo{
+    width: 33.3333333%;
+    height: 180px;
+    float:left;
+}
+
+/* ////BLOG EN LA PAGINA PRINCIPAL///////// */
+
+/* ////DESTACADOS EN LA PAGINA PRINCIPAL///////// */
+
+#highlights article{
+    width:100%;
+}
+
+#highlights article img{
+    width: 100%;
+}
+
+#highlights article .contienearticulo{
+    width: 40%;
+    height: 200px;
+    float:left;
+    margin:40px;
+}
+
+/* ////DESTACADOS EN LA PAGINA PRINCIPAL///////// */

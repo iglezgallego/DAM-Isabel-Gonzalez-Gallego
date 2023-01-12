@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<articulos>
+    <articulo categoria="programacion">
+        <titulo>Titulo de la lamina numero 1</titulo>
+        <subtitulo>Descripcion de la lamina</subtitulo>
+        <descripcion>Esta lamina está hecha con tal técnica y tiene tal significado</descripcion>
+        <imagen></imagen>
+    </articulo>
+    
+    <articulo categoria="diseño">
+        <titulo>Titulo de la lamina</titulo>
+        <subtitulo>Descripcion de la lamina</subtitulo>
+        <descripcion>Esta lamina está hecha con tal técnica y tiene tal significado</descripcion>
+        <imagen></imagen>
+    </articulo>
+    
+    <articulo categoria="diseño">
+        <titulo>Titulo de la lamina</titulo>
+        <subtitulo>Descripcion de la lamina</subtitulo>
+        <descripcion>Esta lamina está hecha con tal técnica y tiene tal significado</descripcion>
+        <imagen></imagen>
+    </articulo>
+    
+    <articulo categoria="diseño">
+        <titulo>Titulo de la lamina</titulo>
+        <subtitulo>Descripcion de la lamina</subtitulo>
+        <descripcion>Esta lamina está hecha con tal técnica y tiene tal significado</descripcion>
+        <imagen></imagen>
+    </articulo>
+</articulos>

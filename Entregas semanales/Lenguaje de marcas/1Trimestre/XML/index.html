@@ -1,0 +1,19 @@
+<html>
+    <head>
+    
+    </head>
+    <body>
+        <div id="contenido"></div>
+        <script>
+            // XMLHttpRequest
+            var miconexion = new XMLHttpRequest();
+            miconexion.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    console.log(miconexion.responseText)
+                }
+            }
+            miconexion.open("GET","archivo.xml",true);
+            miconexion.send();
+        </script>
+    </body>
+</html>

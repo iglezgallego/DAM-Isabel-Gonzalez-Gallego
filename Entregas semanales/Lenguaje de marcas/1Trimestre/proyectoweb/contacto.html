@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es"> 
+   <head>
+    <!-- lo que está en el head va al navegador y no lo ve el usuario en la web -->
+       <title>Curso de aplicaciones web</title>
+       <meta charset="utf-8">
+       <meta name="description" content="Isabel González-Gallego -Mi primera experiencia con lenguaje HTML">
+       <link rel="StyleSheet" href="estilo.css">
+    </head> 
+    <body>
+    <!-- lo que está en el body si lo ve el usuario en la web -->
+        
+        
+        <header>
+            <!-- Aquí voy a poner la cabecera de mi web -->
+            <h1>Isabel González-Gallego Rivera</h1>
+            <h2>Bióloga marina especialista en medio ambiente y futura desarrolladora</h2>
+            <img src="img/nudibranquiofeliz.jpg" style="width:200px;" alt="nudibranqio"; id="imagenlogo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="cursos.html">Cursos</a></li>
+                    <li><a href="sobremi.html">Sobre mi</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="descargas.html">Descargas</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <!-- Aquí voy a poner el contenido principal de mi web -->
+            <section id="contacto">
+            Contenido de mi contacto
+                <form>
+                    <input type="text" name="nombre" placeholder="Introduce tu nombre">
+                    <br>
+                    <input type="email" name="email" placeholder="Introduce tu email">
+                    <br>
+                    <select name="Poblacion">
+                        <option value ="Valencia">Introduce tu población</option>
+                        <option value ="Valencia">Valencia</option>
+                        <option value ="Alicante">Alicante</option>
+                        <option value ="Madrid">Madrid</option>
+                    </select>
+                    <br><br><br>
+                    <p>Indica el color de tus ojos</p>
+                    <input type="radio" name="tipo">Marrón<br>
+                    <input type="radio" name="tipo">Verde<br>
+                    <input type="radio" name="tipo">Azul<br>
+                    <br>
+                    <p>Indica tu rango de edad</p>
+                    <input type="radio" name="edad">10-20<br>
+                    <input type="radio" name="edad">20-30<br>
+                    <input type="radio" name="edad">+ de 30<br>
+                    <br>
+                    <p>¿Cómo nos has conocido?</p>
+                    <input type="checkbox" name="conocer">Facebook<br>
+                    <input type="checkbox" name="conocer">Instagram<br>
+                    <input type="checkbox" name="conocer">Recomendación<br>
+                    <br>
+                    <input type="submit" value="¡Envía tu correo!">
+                </form>
+            </section>
+            
+        </main>
+        <footer>
+            <!-- Aquí voy a poner el pie de página de mi web -->
+            <h4>(c)2022 Isabel González-Gallego Rivera</h4>
+        </footer>
+    </body>
+</html>

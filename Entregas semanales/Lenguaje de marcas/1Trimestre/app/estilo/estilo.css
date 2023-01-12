@@ -1,0 +1,176 @@
+html,body{
+    background:rgb(255,252,248);
+    color:rosybrown;
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}
+main{height:100%;}
+header{height:400px;}
+
+/*///////////////////////ESTILO DEL PASAFOTOS///////////////////////////*/
+
+section article{
+    width:200px;
+    height:200px;
+    float:left;
+    border:0px solid white;
+    position:relative;
+    margin:5px;
+    transform:scale(1,1);
+    z-index:1;
+    transition:all 1s;
+}
+section article img{
+    width:100%;
+    position:absolute;
+    top:0px;
+    left:0px;}
+section article h3, section article h4, section article p{
+    position:relative;
+}
+.aumentado{
+    z-index:1000;
+    border:2px solid rosybrown;
+    transform:scale(1.3,1.2);
+    box-shadow:0px 0px 12px 0px rosybrown;
+}
+section{
+    padding-top:50px;
+    width:100%;
+    height:300px;
+    overflow:hidden;
+}
+section .ribbon{
+    width:4000px;
+    position:relative;
+    left:0px;
+    transition:all 1s;
+
+}
+.botonredondo{
+    width:30px;
+    height:30px;
+    border-radius:30px;
+    background:rgb(220,220,220);
+    color:rosybrown;
+    font-size:30px;
+    text-align: center;
+    line-height:30px;
+    font-weight: bold; 
+    position:absolute;
+}
+.botones{
+    width:100%;
+    position:absolute;
+    z-index:1000;
+}
+.anterior{
+    top:100px;
+    transform:rotate(180deg);
+}
+.posterior{
+    right:20px;
+    top:100px;
+}
+/*///////////////////////ESTILO DEL PASAFOTOS///////////////////////////*/
+
+/*///////////////////////ESTILO DEL DESTACADO///////////////////////////*/
+
+#destacado{
+    position:absolute;
+    width:80%;
+    right:30px;
+    top:0px;
+    height:400px;
+    overflow:hidden;
+    box-shadow: 0px 0px 50px 160px rgb(250, 230, 220) inset;
+}
+
+#destacado img{
+    width:100%;
+    height:100%;
+    opacity:0.6;
+}
+
+#destacado h2, #destacado h3, #destacado p{
+    position:absolute;
+    top:0px;
+}
+
+#destacado h2{
+    padding:30px;
+}
+
+#destacado h3{
+    padding:60px;
+}
+
+#destacado p{
+    padding:90px;
+}
+
+/*///////////////////////ESTILO DEL DESTACADO///////////////////////////*/
+
+/*///////////////////////ESTILO DE LOS DETALLES/////////////////////////*/
+
+.detalles{
+    width:100%;
+    height:0px;
+    background:rgb(250,240,230);
+    box-shadow:0px 0px 30px 0px rgb(250, 230, 220) inset;
+    overflow:hidden;
+    transition: all 1s;
+    position:relative;
+}
+
+.abierto{
+    height:400px;
+}
+
+.muyabierto{
+    height:800px;
+}
+
+
+.detalles h2, .detalles h3, .detalles p, .detalles button{
+    position:absolute;
+}
+
+.detalles h2{
+    top:20px;
+    left:20px;
+}
+
+.detalles h3{
+    top:50px;
+    left:20px;
+}
+
+.detalles p{
+    top:80px;
+    left:20px;
+}
+
+.detalles button{
+    bottom:20px;
+    left:20px;
+    background:    rgb(250, 230, 220);
+    border-radius: 11px;
+    padding:       20px 45px;
+    color:         rosybrown;
+    display:       inline-block;
+    font:          normal bold 26px/1 "Open Sans", sans-serif;
+    text-align:    center;
+    border:0px;
+}
+
+.detalles img{
+    width:100%;
+    height:800px;
+    opacity:0.5;
+}
+
+/*///////////////////////ESTILO DE LOS DETALLES/////////////////////////*/
+
