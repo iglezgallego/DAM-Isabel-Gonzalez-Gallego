@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <style>
+            #cabecera{
+                width:700px;
+                height: 50px;
+                background: #F3F3F3;
+                padding-top: 2px;
+                padding-bottom: 0px;
+                border-radius: 5px 5px 0px 0px;
+                border-bottom: 1px solid #989898;
+             }
+            #ventana{
+                width: 700px; 
+                height: 350px;
+                display: flex;
+                flex-direction:row;
+                background:#E6E3E2;
+             }
+            #botonesizq{
+                width: 300px;
+                margin: 0px;
+                height:0px;
+                margin-left: 15px;
+                margin-top:15px;
+                }
+            .redondos{
+                border-radius: 100px;
+                width: 18px;
+                height: 18px;
+                background: #FF441A;
+                border: 0px;
+            }
+            #botonescentro{
+                float:right;
+                margin-right:120px;
+                margin-top:0px;
+                border-radius:0px 20px 0px 20px;
+            }
+            .menu{
+                margin:0px;
+                margin-right:-5px;
+                padding:5px;
+                border:1px solid black;
+            }
+           #rojo{
+                background:red;
+            }
+            #naranja{
+                background:orange;
+            }
+            #gris{
+                background:lightgrey;
+            }
+            #imagen{
+                width: 70%;
+                margin-top:70px;
+                margin-left:20px;
+            }
+            h1{
+                font-family:sans-serif;
+                margin-bottom:0px;
+            }
+            h2{
+                font-family:sans-serif;
+                font-size: 15px;
+                margin-top:0px;
+            }
+            
+            #piepagina{
+                width: 700px; 
+                height: 50px;
+                background:#E6E3E2;
+                text-align: center;
+                color: #A6A6A6;
+            }
+            #descripcion{
+                font-family:sans-serif;
+                font-size: 15px;
+            }
+            
+            
+        </style>
+    
+    </head>
+    <body>
+        <div id="cabecera">
+            <div id="botonesizq">
+                <button class="redondos" id="rojo"></button>
+                <button class="redondos" id="naranja"></button>
+                <button class="redondos" id="gris"></button>
+            </div>
+            <div id="botonescentro">
+                <button class="menu">Visión general</button>
+                <button class="menu">Pantallas</button>
+                <button class="menu">Almacenamiento</button>
+                <button class="menu">Soporte</button>
+                <button class="menu">Recursos</button>
+            </div>
+        </div>
+            
+            <div id="ventana">
+                <div id="logo">
+                    <img src=img/macoslogo.png id="imagen">
+                </div>
+                
+                <div id="contenido">
+                    <h1>MacOs Monterey</h1>
+                    <h2>Version 12.0.1</h2>
+                    <p id="descripcion">
+                        <b>MacBook Pro</b> (15-inch, 2017)<br><br>
+                        <b>Procesador</b> 2,3 GHz Intel Core i9 de 8 núcleos<br><br>
+                        <b>Memoria</b> 16 GB 2667 MHz DDR4<br><br>
+                        <b>Disco de arranque</b> Machintosh HD<br><br>
+                        <b>Gráficos</b> Intel UHD Graphics 630<br><br>
+                        <b>Número de serie</b> XY0XX0XXY0X
+                    </p>
+                    <div id="botonesfin">
+                        <button class="final">Informe del sistema</button>
+                        <button class="final">Actualización de software</button>
+                    </div>
+                </div>
+            </div>
+            <div id=piepagina> 
+                    &trade; and &copy 1983-2021 Apple Inc. Todos los derechos reservados.
+                </div>
+    </body>
+
+</html>
