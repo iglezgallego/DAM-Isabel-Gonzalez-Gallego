@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.2.0
+- https://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 27-09-2022 a las 19:51:03
+- Versión del servidor: 10.4.24-MariaDB
+- Versión de PHP: 8.1.6
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="cursoaplicacionesweb" collation="utf8_spanish_ci" charset="utf8">
+            <pma:table name="usuarios">
+                CREATE TABLE `usuarios` (
+                  `Identificador` int(255) NOT NULL AUTO_INCREMENT,
+                  `usuario` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `nombre` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `apellidos` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `email` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `direccion` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  `telefono` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+                  PRIMARY KEY (`Identificador`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT=&#039;Aquí voy a guardar los datos de mis usuarios&#039;;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'cursoaplicacionesweb'
+    -->
+    <database name="cursoaplicacionesweb">
+        <!-- Tabla usuarios -->
+        <table name="usuarios">
+            <column name="Identificador">1</column>
+            <column name="usuario">iglezgallego</column>
+            <column name="password">contraseña</column>
+            <column name="nombre">Isabel</column>
+            <column name="apellidos">González Gallego Rivera</column>
+            <column name="email">iglezgallego@gmail.com</column>
+            <column name="direccion">San Jerónimo Torrent</column>
+            <column name="telefono">660678685</column>
+        </table>
+        <table name="usuarios">
+            <column name="Identificador">3</column>
+            <column name="usuario">Isa</column>
+            <column name="password">isacontra</column>
+            <column name="nombre">Isabel &#039;La rubia&#039; </column>
+            <column name="apellidos">Gonzalez-Gallego</column>
+            <column name="email">isaisa@gmail.com</column>
+            <column name="direccion">benimamet</column>
+            <column name="telefono">677877888</column>
+        </table>
+    </database>
+</pma_xml_export>

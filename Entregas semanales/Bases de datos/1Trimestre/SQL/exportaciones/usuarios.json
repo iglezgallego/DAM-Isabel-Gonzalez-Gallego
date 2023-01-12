@@ -1,0 +1,10 @@
+[
+{"type":"header","version":"5.2.0","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"cursoaplicacionesweb"},
+{"type":"table","name":"usuarios","database":"cursoaplicacionesweb","data":
+[
+{"Identificador":"1","usuario":"iglezgallego","password":"contraseña","nombre":"Isabel","apellidos":"González Gallego Rivera","email":"iglezgallego@gmail.com","direccion":"San Jerónimo Torrent","telefono":"660678685"},
+{"Identificador":"3","usuario":"Isa","password":"isacontra","nombre":"Isabel 'La rubia' ","apellidos":"Gonzalez-Gallego","email":"isaisa@gmail.com","direccion":"benimamet","telefono":"677877888"}
+]
+}
+]
