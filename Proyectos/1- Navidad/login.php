@@ -13,7 +13,6 @@ if($fila = $resultado->fetch_assoc()){
     $resultado2 = $conexion->query($consulta2);
     $_SESSION['pasas'] = true;
     if($fila2 = $resultado2->fetch_assoc()){
-        //PONER BIEN LA DIRECCION URL PARA QUE TE SALGA EL CALENDARIO QUE TIENE GUARDADO EN LA BASE DE DATOS
         header("Location:app/app.php?idpadre=".$fila2['idtema']);
     }else{
         header("Location:app/temas.php");

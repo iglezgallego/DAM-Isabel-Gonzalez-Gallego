@@ -1,11 +1,14 @@
 <?php
+    //Si existe "error" y es igual a "si", saca una pestaña emergente con el mensaje
     if(isset($_GET['error']) && $_GET['error']=="si"){
         echo '<script>alert("El usuario no existe o la contraseña es incorrecta");</script>';  
 }
+    //Si existe "registro" y es igual a "si", saca una pestaña emergente con el mensaje
     if(isset($_GET['registro']) && $_GET['registro']=="si"){
         echo '<script>alert("El usuario se ha registrado correctamente");</script>';
     }
 ?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -16,12 +19,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
       <!--icono de la pestaña-->
     <link rel="icon" href="assets/brand/bootstrap-logo.ico"> 
-
-    
-
-    
-
-<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -84,39 +82,34 @@
             src: url("fuentes/gaston.otf")
         }
     </style>
-
-    
-    <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    
-<main class="form-signin w-100 m-auto">
-  <form action="login.php" method="post" >
-    <img class="mb-4" src="assets/brand/bootstrap-logo.png" alt="" width="90" height="90">
-    <h1 style="font-family:gaston; font-size:80px;">YourGoals</h1>
-    <br>
-    <h2 class="h3 mb-3 fw-normal" style="font-size:20px;">Iniciar sesión</h2>
+    <main class="form-signin w-100 m-auto">
+    <!-- Formulario para el log in -->
+      <form action="login.php" method="post">
+        <img class="mb-4" src="assets/brand/bootstrap-logo.png" alt="" width="90" height="90">
+        <h1 style="font-family:gaston; font-size:80px;">YourGoals</h1>
+        <br>
+        <h2 class="h3 mb-3 fw-normal" style="font-size:20px;">Iniciar sesión</h2>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Tu nombre de usuario" name="usuario" required>
-      <label for="floatingInput">Usuario</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Tu contraseña" name="contrasena" required style="border-radius: 5px 5px 5px 5px;">
-      <label for="floatingPassword">Contraseña</label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" style="background:#7C4376; color:#F5E1F3; border:0px;">Acceder</button>
-    
-  </form>
-    <br>
-    <form action="singin.php" method="post">
-        <button class="w-100 btn btn-lg btn-primary" style="background: #736C74; color:white; border:0px;">Registrarse</button>
-    </form>
-    <p class="mt-5 mb-3 text-muted">&copy; Isabel González-Gallego 2022</p>
-</main>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Tu nombre de usuario" name="usuario" required>
+          <label for="floatingInput">Usuario</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Tu contraseña" name="contrasena" required style="border-radius: 5px 5px 5px 5px;">
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" style="background:#7C4376; color:#F5E1F3; border:0px;">Acceder</button>
 
-
-    
+      </form>
+        <br>
+        <form action="singin.php" method="post">
+            <button class="w-100 btn btn-lg btn-primary" style="background: #736C74; color:white; border:0px;">Registrarse</button>
+        </form>
+        <!-- Pie de pagina -->
+        <p class="mt-5 mb-3 text-muted">&copy; Isabel González-Gallego 2022</p>
+    </main>
   </body>
 </html>

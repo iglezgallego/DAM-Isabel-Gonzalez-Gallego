@@ -5,7 +5,7 @@ include "../config.php";
 //Control de SESSION para no poder colarse a app.php sin pasar por login
 if(!isset($_SESSION['pasas']) || $_SESSION['pasas'] == false){
     //echo "Te has intentado colar a la aplicación sin permiso";
-    header("Location:../index.html");
+    header("Location:../index.php");
 }
 //control de las fechas
 $fechaActual = date('Y-m-d');
@@ -151,6 +151,7 @@ $fechaActual = date('Y-m-d');
         }
             
     </style>
+    <!-- FIN ESTILO CSS -->
 
     <!-- CABECERA PÁGINA -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
@@ -192,8 +193,9 @@ $fechaActual = date('Y-m-d');
                     //echo "<p>".$diferenciadias."</p>"; para probar que realiza el cálculo
                     //en caso de que la diferencia de dias sea mayor a 12 redirigimos al usuario a la pantalla de temas con una variable en url de finalizacion
                     if($diferenciadias>12){
+                        echo '<meta http-equiv="refresh" content="0; url=temas.php?finalizado=si"/>';
+                        //header("Location:temas.php?finalizado=si");
                         
-                        header("Location:temas.php?finalizado=si");
                     }
                 }
                 //ESTRUCTURA CALENDARIO

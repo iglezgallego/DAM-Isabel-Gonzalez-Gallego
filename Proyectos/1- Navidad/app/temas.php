@@ -6,7 +6,7 @@ include "../config.php";
 
 if(!isset($_SESSION['pasas']) || $_SESSION['pasas'] == false){
             //echo "Te has intentado colar a la aplicación sin permiso";
-            header("Location:../index.html");
+            header("Location:../index.php");
 }
 //En caso de que el numero de días para hacer el calendario haya expirado, se borra el registro correspondiente al usuario y se le pide al usuario escoger un nuevo calendario
 //si existe la variable finalizado en la url y finalizado es = a si

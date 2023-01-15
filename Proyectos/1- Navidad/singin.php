@@ -1,6 +1,7 @@
 <?php
     if(isset($_GET['error']) && $_GET['error']=="si"){
         echo '<script>alert("El usuario o el email ya existe")</script>';
+    //Si existe "error" y es igual a "si" saca una pestaña emergente con el mensaje
     }
 ?>
 
@@ -12,12 +13,9 @@
     <title>YourGoals - Registrarse</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
-
-    
-
-    
-
-<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+      <!--icono de la pestaña-->
+    <link rel="icon" href="assets/brand/bootstrap-logo.ico">
 
     <style>
       .bd-placeholder-img {
@@ -81,35 +79,36 @@
     <link href="signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    
-<main class="form-signin w-100 m-auto">
-  <form action="conf_singin.php" method="post">
-    <img class="mb-4" src="assets/brand/bootstrap-logo.png" alt="" width="90" height="90">
-    <br>
-    <h2 class="h3 mb-3 fw-normal" style="font-size:20px;">Crea tu cuenta</h2>
+    <main class="form-signin w-100 m-auto">
+    <!-- Formulario para el sing in -->
+        <form action="conf_singin.php" method="post">
+            <img class="mb-4" src="assets/brand/bootstrap-logo.png" alt="" width="90" height="90">
+            <br>
+            <h2 class="h3 mb-3 fw-normal" style="font-size:20px;">Crea tu cuenta</h2>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Tu nombre de usuario" name="usuario" required>
-      <label for="floatingInput">Introduce tu nombre de usuario</label>
-    </div>
-    <br>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingPassword" placeholder="Tu email" name="email" required style="border-radius:5px 5px 5px 5px;">
-      <label for="floatingPassword">Introduce tu email</label>
-    </div>
-    <br>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Tu contraseña" name="contrasena" required style="border-radius:5px 5px 5px 5px;">
-      <label for="floatingPassword">Introduce tu nueva contraseña</label>
-    </div>
-    <br>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" style="background:#736C74; color:white; border:0px;">Registrarse</button>
-  </form>
-    <br>
-    <p class="mt-5 mb-3 text-muted">&copy; Isabel González-Gallego 2022</p>
-</main>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="floatingInput" placeholder="Tu nombre de usuario" name="usuario" required>
+              <label for="floatingInput">Introduce tu nombre de usuario</label>
+            </div>
+            <br>
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingPassword" placeholder="Tu email" name="email" required style="border-radius:5px 5px 5px 5px;">
+              <label for="floatingPassword">Introduce tu email</label>
+            </div>
+            <br>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Tu contraseña" name="contrasena" required style="border-radius:5px 5px 5px 5px;">
+              <label for="floatingPassword">Introduce tu nueva contraseña</label>
+            </div>
+            <br>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" style="background:#736C74; color:white; border:0px;">Registrarse</button>
+        </form>
+        <br><br>
+        <a href="index.php"><button id="atras" style="width:100px;border-radius:10px 10px 10px 10px;">Volver</button></a>
+        <br>
+        <!-- Pie de pagina -->
+        <p class="mt-5 mb-3 text-muted">&copy; Isabel González-Gallego 2022</p>
+    </main>
 
-
-    
   </body>
 </html>
