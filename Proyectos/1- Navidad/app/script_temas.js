@@ -1,3 +1,4 @@
+//SCRIPT PARA EFECTO DESPLEGABLE DE LOS TEMAS Y DE LOS CALENDARIOS
 $(document).ready(function(){
     $("span").click(function(){
         var idpadre = '#';

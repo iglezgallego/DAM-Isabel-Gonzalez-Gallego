@@ -5,7 +5,7 @@ include "../config.php";
 //Control de SESSION para no poder colarse a app.php sin pasar por login
 if(!isset($_SESSION['pasas']) || $_SESSION['pasas'] == false){
     //echo "Te has intentado colar a la aplicación sin permiso";
-    header("Location:../index.php");
+    header("Location:../home.php");
 }
 //control de las fechas
 $fechaActual = date('Y-m-d');
@@ -156,93 +156,94 @@ $fechaActual = date('Y-m-d');
     <!-- CABECERA PÁGINA -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
   </head>
-<body class="d-flex flex-column h-100">
-    <header>
-      <!-- Barra de navegacion -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" style="color:#DBD5DC; margin-left:20px;"><?php echo $_SESSION['usuario']; ?>, es hora de superar tus retos</a>
-            <div id="contenedorlogo">
-                <img src="../assets/brand/bootstrap-logo.png" alt="logo" style="height:50px;width:50px;">
-                <h1 style="font-family:gaston;color:#DBD5DC; padding-left:10px; font-size:50px;">YourGoals</h1>  
+    <body class="d-flex flex-column h-100">
+        <header>
+          <!-- Barra de navegacion -->
+          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="color:#DBD5DC; margin-left:20px;"><?php echo $_SESSION['usuario']; ?>, es hora de superar tus retos</a>
+                <div id="contenedorlogo">
+                    <img src="../assets/brand/bootstrap-logo.png" alt="logo" style="height:50px;width:50px;">
+                    <h1 style="font-family:gaston;color:#DBD5DC; padding-left:10px; font-size:50px;">YourGoals</h1>  
+                </div>
+                <div class="contenedorbotones">
+                    <button style="margin-right:10px;border-radius: 5px 5px 5px 5px; background:#D0CBD2;color:#44035D;" onclick="advertencia()">Terminar calendario</button>
+                    <a href="logout.php"><button style="border-radius: 5px 5px 5px 5px; background:#D0CBD2;color:#44035D;">Cerrar sesión</button></a>
+                </div>
             </div>
-            <div class="contenedorbotones">
-                <button style="margin-right:10px;border-radius: 5px 5px 5px 5px; background:#D0CBD2;color:#44035D;" onclick="advertencia()">Terminar calendario</button>
-                <a href="logout.php"><button style="border-radius: 5px 5px 5px 5px; background:#D0CBD2;color:#44035D;">Cerrar sesión</button></a>
-            </div>
-        </div>
-      </nav>
-    </header>
+          </nav>
+        </header>
 
 <!-- CONTENIDO PÁGINA -->
-    <main class="flex-shrink-0">
-      <div class="container" style="margin-bottom:20px;">
-          <h1 class="mt-5">Calendario de <?php echo $nombreCalendario; ?></h1>
-          <h4>Descubre tu nuevo reto</h4>
-          <br>
-          <div id="contendortemas" style="display:flex;flex-wrap:wrap;flex-direction:row;">
-              <?php
-                //CÁLCULO DE DIFERENCIA DE DIAS
-                $consulta5 = "SELECT * FROM registros WHERE idusuario = '".$_SESSION['idtablausuario']."'"; //Sacame de la tabla registros donde el idusuario coincida con el valor de la varible SESSION idtablasusuarios que corresponde con el Identificador de la tabla usuarios
-                $resultado5 = $conexion->query($consulta5); //Lanzo la petición
-                if($fila5=$resultado5->fetch_assoc()){
-                    //con el metodo strtotime damos formato de fecha a la variable fecha guardada como un string en la base de datos
-                    $inicio = strtotime($fila5['fechainicio']);
-                    $ultimafecha = strtotime($fila5['ultimaconexion']);
-                    $diferenciadias = ceil(abs($ultimafecha - $inicio) / 86400);
-                    //echo "<p>".$diferenciadias."</p>"; para probar que realiza el cálculo
-                    //en caso de que la diferencia de dias sea mayor a 12 redirigimos al usuario a la pantalla de temas con una variable en url de finalizacion
-                    if($diferenciadias>12){
-                        echo '<meta http-equiv="refresh" content="0; url=temas.php?finalizado=si"/>';
-                        //header("Location:temas.php?finalizado=si");
-                        
+        <main class="flex-shrink-0">
+          <div class="container" style="margin-bottom:20px;">
+              <h1 class="mt-5">Calendario de <?php echo $nombreCalendario; ?></h1>
+              <h4>Descubre tu nuevo reto</h4>
+              <br>
+              <div id="contendortemas" style="display:flex;flex-wrap:wrap;flex-direction:row;">
+                  <?php
+                    //CÁLCULO DE DIFERENCIA DE DIAS
+                    $consulta5 = "SELECT * FROM registros WHERE idusuario = '".$_SESSION['idtablausuario']."'"; //Sacame de la tabla registros donde el idusuario coincida con el valor de la varible SESSION idtablasusuarios que corresponde con el Identificador de la tabla usuarios
+                    $resultado5 = $conexion->query($consulta5); //Lanzo la petición
+                    if($fila5=$resultado5->fetch_assoc()){
+                        //con el metodo strtotime damos formato de fecha unicode a la variable fecha guardada como un string en la base de datos
+                        $inicio = strtotime($fila5['fechainicio']);
+                        $ultimafecha = strtotime($fila5['ultimaconexion']);
+                        //ceil hace un redondeo al alza y abs me devulve el valor absoluto positivo de una operacion
+                        $diferenciadias = ceil(abs($ultimafecha - $inicio) / 86400); //86400 corresponde al numero de segundos en un dia
+                        //en caso de que la diferencia de dias sea mayor a 12 redirigimos al usuario a la pantalla de temas con una variable en url de finalizacion
+                        if($diferenciadias>12){
+                            echo '<meta http-equiv="refresh" content="0; url=temas.php?finalizado=si"/>';
+                            //header("Location:temas.php?finalizado=si");
+
+                        }
                     }
-                }
-                //ESTRUCTURA CALENDARIO
-                $contador = 0;
-                $diascabecera = 0;
-                $consulta = "SELECT * FROM retos WHERE idhijo = '".$_GET['idpadre']."' "; //Sacame de la tabla de retos el valor de idhijo que coincida con idpadre de usuarios
-                $resultado = $conexion->query($consulta); //lanzo peticion
-                //PREPARO FECHA PARA LOS DIVS
-                $primerafecha = ""; 
-                $consulta2 = "SELECT * FROM registros WHERE idusuario = '".$_SESSION['idtablausuario']."'";
-                $resultado2 = $conexion->query($consulta2);
-                if($fila2=$resultado2->fetch_assoc()){
-                    $primerafecha = $fila2['fechainicio'];
-                }
-                
-                while($fila=$resultado->fetch_assoc()) { //Mientras coincida guardalo en un matriz asociativa
-                    $diascabecera++; //incremento de la variable 
-                    $fechaparrafo = strtotime($primerafecha.'+'.$contador.' days');
-                    echo
-                        '<div class="calendario" style="width:250px; height:100%;background:#F8F2FA ;border-radius:5px 10px 10px 10px; margin:20px;padding:15px;box-shadow:5px 0px 5px 0px #545454;">
-                            <div class="cabeceradia" style="margin-bottom:10px;">
-                                <img src="img/'.$fila['logo'].'" style="width:20%; margin-right:8px;"> 
-                                <h2 style="text-align:center;">DÍA '.$diascabecera.'</h2>
+                    //ESTRUCTURA CALENDARIO
+                    $contador = 0;
+                    $diascabecera = 0;
+                    $consulta = "SELECT * FROM retos WHERE idhijo = '".$_GET['idpadre']."' "; //Sacame de la tabla de retos el valor de idhijo que coincida con idpadre de usuarios
+                    $resultado = $conexion->query($consulta); //lanzo peticion
+                    //PREPARO FECHA PARA LOS DIVS
+                    $primerafecha = ""; 
+                    $consulta2 = "SELECT * FROM registros WHERE idusuario = '".$_SESSION['idtablausuario']."'";
+                    $resultado2 = $conexion->query($consulta2);
+                    if($fila2=$resultado2->fetch_assoc()){
+                        $primerafecha = $fila2['fechainicio'];
+                    }
+
+                    while($fila=$resultado->fetch_assoc()) { //Mientras coincida guardalo en un matriz asociativa
+                        $diascabecera++; //incremento de la variable 
+                        //con esta operacion sumo un dia a la fecha de inicio del calendario
+                        $fechaparrafo = strtotime($primerafecha.'+'.$contador.' days');
+                        echo
+                            '<div class="calendario" style="width:250px; height:100%;background:#F8F2FA ;border-radius:5px 10px 10px 10px; margin:20px;padding:15px;box-shadow:5px 0px 5px 0px #545454;">
+                                <div class="cabeceradia" style="margin-bottom:10px;">
+                                    <img src="img/'.$fila['logo'].'" style="width:20%; margin-right:8px;"> 
+                                    <h2 style="text-align:center;">DÍA '.$diascabecera.'</h2>
+                                </div>';                                    //con este date doy formato de fecha a la fecha unicode que guarda fechaparrafo
+                                echo '<p style="text-align:center;color:grey;">'.date('d/m/Y', $fechaparrafo).'</p>';
+                                echo '<span id="comenzar'.$fila['Identificador'].'">';
+                                    if($contador<=$diferenciadias || $contador==$diferenciadias){
+                                        echo '<button class="comenzar">Comenzar</button>';
+                                    }else{
+                                        echo '<button disabled class="comenzar">Comenzar</button>';
+                                    }
+                                    echo  '<p class="nuevoreto" style="padding-top:20px;">'.$fila['reto'].'</p>
+                                </span>
                             </div>';
-                            echo '<p style="text-align:center;color:grey;">'.date('d/m/Y', $fechaparrafo).'</p>';
-                            echo '<span id="comenzar'.$fila['Identificador'].'">';
-                                if($contador<=$diferenciadias || $contador==$diferenciadias){
-                                    echo '<button class="comenzar">Comenzar</button>';
-                                }else{
-                                    echo '<button disabled class="comenzar">Comenzar</button>';
-                                }
-                                echo  '<p class="nuevoreto" style="padding-top:20px;">'.$fila['reto'].'</p>
-                            </span>
-                        </div>';
-                    $contador++;
-                }
-                // hemos realizado un control de fechas para que se muestren solo los botones que correspondan según los días que llevas accediendo a la app. El dia de inicio se abre el primer reto y así hasta el último día que será el día 12
-                ?>
-            </div>
-      </div>
-    </main>
+                        $contador++;
+                    }
+                    // hemos realizado un control de fechas para que se muestren solo los botones que correspondan según los días que llevas accediendo a la app. El dia de inicio se abre el primer reto y así hasta el último día que será el día 12
+                    ?>
+                </div>
+          </div>
+        </main>
 <!-- PIE DE PAGINA -->
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <span class="text-muted">&copy; Isabel González-Gallego</span>
-      </div>
-    </footer>
+        <footer class="footer mt-auto py-3 bg-light">
+          <div class="container">
+            <span class="text-muted">&copy; Isabel González-Gallego 2022</span>
+          </div>
+        </footer>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
-
+//elimino session y redirijo a home.php
     session_start();
     session_destroy();
     
-    header('Location:../index.php');
+    header('Location:../home.php');
 
 ?>

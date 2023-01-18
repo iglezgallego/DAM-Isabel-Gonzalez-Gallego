@@ -72,6 +72,13 @@
             background: rgb(205,178,205);
             background: linear-gradient(90deg, rgba(205,178,205,1) 46%, rgba(161,78,149,1) 100%);
         }
+        #atras{
+            background: none !important;
+            border: none !important;
+            font-weight: 400;
+            font-size: 19px;
+            color:#382E41;
+        }
     </style>
 
     
@@ -80,7 +87,7 @@
   </head>
   <body class="text-center">
     <main class="form-signin w-100 m-auto">
-    <!-- Formulario para el sing in -->
+    <!-- Formulario para el singin con el metodo post y conectado a conf_singin.php -->
         <form action="conf_singin.php" method="post">
             <img class="mb-4" src="assets/brand/bootstrap-logo.png" alt="" width="90" height="90">
             <br>
@@ -104,7 +111,7 @@
             <button class="w-100 btn btn-lg btn-primary" type="submit" style="background:#736C74; color:white; border:0px;">Registrarse</button>
         </form>
         <br><br>
-        <a href="index.php"><button id="atras" style="width:100px;border-radius:10px 10px 10px 10px;">Volver</button></a>
+        <a href="home.php"><button id="atras" style="width:150px;"><span style="font-size:20px;font-weight:600;">⇦</span> Volver</button></a>
         <br>
         <!-- Pie de pagina -->
         <p class="mt-5 mb-3 text-muted">&copy; Isabel González-Gallego 2022</p>
