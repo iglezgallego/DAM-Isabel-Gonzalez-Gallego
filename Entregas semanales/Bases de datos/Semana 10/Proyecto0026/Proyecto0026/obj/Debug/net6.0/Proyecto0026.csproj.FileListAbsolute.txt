@@ -1,0 +1,15 @@
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\bin\Debug\net6.0\Proyecto0026.exe
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\bin\Debug\net6.0\Proyecto0026.deps.json
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\bin\Debug\net6.0\Proyecto0026.runtimeconfig.json
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\bin\Debug\net6.0\Proyecto0026.dll
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\bin\Debug\net6.0\Proyecto0026.pdb
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.csproj.AssemblyReference.cache
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.GeneratedMSBuildEditorConfig.editorconfig
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.AssemblyInfoInputs.cache
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.AssemblyInfo.cs
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.csproj.CoreCompileInputs.cache
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.dll
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\refint\Proyecto0026.dll
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.pdb
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\Proyecto0026.genruntimeconfig.cache
+C:\IsabelVS\CS\Proyecto0026\Proyecto0026\obj\Debug\net6.0\ref\Proyecto0026.dll
