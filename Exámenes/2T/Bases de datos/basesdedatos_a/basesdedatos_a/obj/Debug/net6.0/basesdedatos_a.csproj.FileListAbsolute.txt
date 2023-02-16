@@ -1,0 +1,15 @@
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\bin\Debug\net6.0\basesdedatos_a.exe
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\bin\Debug\net6.0\basesdedatos_a.deps.json
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\bin\Debug\net6.0\basesdedatos_a.runtimeconfig.json
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\bin\Debug\net6.0\basesdedatos_a.dll
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\bin\Debug\net6.0\basesdedatos_a.pdb
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.csproj.AssemblyReference.cache
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.GeneratedMSBuildEditorConfig.editorconfig
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.AssemblyInfoInputs.cache
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.AssemblyInfo.cs
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.csproj.CoreCompileInputs.cache
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.dll
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\refint\basesdedatos_a.dll
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.pdb
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\basesdedatos_a.genruntimeconfig.cache
+C:\IsabelVS\CS\basesdedatos_a\basesdedatos_a\obj\Debug\net6.0\ref\basesdedatos_a.dll
