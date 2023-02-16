@@ -4,7 +4,7 @@ import math
 conexion = basedatos.connect("apellidos.db")
 #Establezco un cursor para realizar peticiones
 cursor = conexion.cursor()
-#Pongo limite 1000 para que no muestre una lista tan larga
+#Realizo la petición
 cursor.execute("SELECT * FROM apellidos;")
 #coge todos los elementos de la bbdd
 datos = cursor.fetchall()
@@ -23,7 +23,7 @@ print("\n")
 def apellido():
     ##LISTA CON TODOS LOS APELLIDOS QUE EMPIEZAN CON LA MISMA LETRA QUE EL MIO
     #Pregunto al usuario
-    print("Dime la letra por la que empieza tu apellido")
+    print("Dime la letra por la que empieza tu apellido en mayúsculas")
     #Creo una variable con la letra por la que empieza mi apellido    
     letra = input()
     #Creo una lista vacía
