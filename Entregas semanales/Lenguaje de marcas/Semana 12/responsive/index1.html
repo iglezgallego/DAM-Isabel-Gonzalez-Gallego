@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <script
+          src="https://code.jquery.com/jquery-3.6.3.js"
+          integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+          crossorigin="anonymous">
+        </script>
+        <style>
+            body,html{
+                background:grey;
+                height: 100%;
+            }
+            
+            @media screen and (min-width: 800px) {
+                main{
+                    background:white;
+                    width:800px;
+                    margin:auto;
+                    height: 100%;
+                }
+                h1{
+                    color:#330379;
+                }
+                
+                nav ul{
+                    list-style-type:none;
+                    padding:0px;
+                    margin:0px;
+                }
+                nav ul li{
+                  float:left;
+                    background:#CCC5E5;
+                    color:#8365AE;
+                    padding:10px;
+                    margin:1px;
+                }
+                nav ul li:first-child{
+                    border-radius:15px 0px 0px 15px;
+                }
+                nav ul li:last-child{
+                    border-radius:0px 15px 15px 0px;
+                }
+            }
+            
+            @media screen and (max-width: 800px) {
+                main{
+                    background:white;
+                    width:100%;
+                    margin:auto;
+                    height: 100%;
+                }
+                h1{
+                    color:#8365AE;
+                    text-align:center;
+                }
+                #formatopc{
+                    display:none;
+                }
+                nav ul{
+                list-style-type:none;
+                padding:0px;
+                margin:0px;
+                height:40px;
+                overflow:hidden;
+                transition: all 2s;
+                }
+                nav ul li{
+                    width:100%;
+                    background:#8365AE;
+                    color:#CCC5E5;
+                    padding:10px;
+                    border-bottom: 1px dashed white;
+                    text-align:center;
+                    text-transform: uppercase;
+                }
+            }
+            .abierto{
+                height:400px;
+            }
+        </style>
+        <script>
+            var abierto = false;
+           $(document).ready(function(){
+               $("nav ul").click(function(){
+                   if(abierto == false){
+                        $(this).addClass("abierto")
+                        abierto = true; 
+                   }else{
+                       $(this).removeClass("abierto")
+                        abierto = false; 
+                   }
+               })
+           }) 
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Este es el título de la página</h1>
+            Esta es la parte principal de la web
+            <nav>
+                <ul>
+                    <li>Inicio</li>
+                    <li>Información</li>
+                    <li>Noticias</li>
+                    <li>Novedades</li>
+                    <li>Contacto</li>
+                </ul>
+            </nav>
+            <div style="clear:both;"></div>
+            <p id="formatopc">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+        </main>
+    </body>
+</html>
