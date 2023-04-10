@@ -1,0 +1,15 @@
+from tkinter import *
+
+marco = Frame(width=300,height=30)
+marco.pack(padx=0,pady=0)
+
+#lienzo es una variable que tiene la funcion Canvas de tkinter
+lienzo = Canvas()
+
+#dibujo una letra A (con 2 lineas poniendo más parámetros)
+lienzo.create_line(10,100,10,10,40,10,40,100)
+lienzo.create_line(10,50,40,50)
+
+
+
+lienzo.pack(side=TOP)
