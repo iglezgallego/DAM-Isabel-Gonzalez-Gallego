@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="jquery-3.6.4.min.js"></script>
+        <style>
+            p,input,button{
+                width:100%;
+                color:gray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="titulo">App de Isabel</h1>
+        <p>Introduce el operando número 1</p>
+        <input type="text" id="operando1">
+        <p>Introduce el operando número 2</p>
+        <input type="text" id="operando2"><br><br>
+        <button id="calcula">Calcular la suma</button>
+        <p>Resultado</p>
+        <input type="text" id="resultado">
+        <script>
+        $(document).ready(function(){
+            $("#calcula").click(function(){
+                //multiplico por 1 para que convierta una cadena de caracteres en un numero
+                var op1 = $("#operando1").val()*1
+                var op2 = $("#operando2").val()*1
+                //sumo los dos valores
+                var resultado = op1+op2
+                //En el id resultado muestra el resultado
+                $("#resultado").val(resultado)
+            })
+        })
+        
+        </script>
+    </body>
+
+</html>
