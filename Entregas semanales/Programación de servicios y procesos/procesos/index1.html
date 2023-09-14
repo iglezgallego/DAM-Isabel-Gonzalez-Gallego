@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+    
+    </head>
+    <body>
+        <script>
+            //3.vamos a calcular el tiempo que tarda el programa en realizar el calculo en milisegundos
+            //saco el inicio de la operacion y el final con fecha unix
+
+            //4.saco el tiempo de inicio
+            const tiempoInicio = Date.now()
+            
+            //CALCULO 1
+            console.log("vamos con el calculo 1")
+            var numero = 0.0000423343;
+            var iteraciones = 100000000;
+            for(var i = 0;i<iteraciones;i++){
+                //1. para realizar muchas operaciones básicas pero complejas
+                numero = numero * 1.000000000005435;
+            }
+            
+            //CALCULO 2
+            console.log("vamos con el calculo 2")
+            var numero = 0.0000423343;
+            var iteraciones = 100000000;
+            for(var i = 0;i<iteraciones;i++){
+                //para realizar muchas operaciones básicas pero complejas
+                numero = numero * 1.000000000005435;
+            }
+            //CALCULO 3
+            console.log("vamos con el calculo 3")
+            var numero = 0.0000423343;
+            var iteraciones = 100000000;
+            for(var i = 0;i<iteraciones;i++){
+                //para realizar muchas operaciones básicas pero complejas
+                numero = numero * 1.000000000005435;
+            }
+            
+            //CALCULO 4
+            console.log("vamos con el calculo 4")
+            var numero = 0.0000423343;
+            var iteraciones = 100000000;
+            for(var i = 0;i<iteraciones;i++){
+                //para realizar muchas operaciones básicas pero complejas
+                numero = numero * 1.000000000005435;
+            }
+            //2.Con estos calculos se forma un cuello de botella y podemos observar que el 50% de la capacidad de proceso esta sin utilizar
+            
+            
+            //5.saco el tiempo final de la operacion
+            const tiempoFinal = Date.now()
+            //saca por consola el tiempo de inicio
+            //console.log(tiempoInicio)
+            
+            //console.log(numero);
+            //La carga en los nucleos sube pero no ocupa todos los nucleos de procesamiento y se puede decir que el procesador esta siendo infrautilizado
+            
+            console.log("el tiempo requerido para calcular este programa ha sido de "+(tiempoFinal - tiempoInicio))
+            //6.Saco el tiempo total que tarda en realizar los calculos.En el monitor de recursos podemos ver que no se usan todos los nucleos de calculo por lo que se infravaloran estos nucleos
+            
+        </script>
+    </body>
+
+</html>

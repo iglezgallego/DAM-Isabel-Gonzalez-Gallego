@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+            
+            //saco el tiempo de inicio
+            const tiempoInicio = Date.now()
+            
+            //Saco el numero de nucleos que tiene mi ordenador para que cada worker se coloque en uno y usemos todos
+            var numeroDeNucleos = navigator.hardwareConcurrency;
+            console.log("El ordenador que estas usando tiene "+numeroDeNucleos+" núcleos")
+            //Creo un conjunto de Workers tantos como nucleos de procesamiento tengo en el sistema
+            var trabajador = new Array();
+            for(var i = 0; i<numeroDeNucleos;i++){
+                trabajador[i] = new Worker ("tarea2.js")
+                trabajador[i].postMessage("comienza");
+                trabajador[i].onmessage = function(datos){
+                    console.log(datos.data)
+                }
+            }
+            //saco el tiempo final de la operacion
+            const tiempoFinal = Date.now()
+            console.log("el tiempo requerido para calcular este programa ha sido de "+(tiempoFinal - tiempoInicio))
+            //Saco el tiempo total que tarda en realizar los calculos.En el monitor de recursos podemos ver que no se usan todos los nucleos de calculo por lo que se infravaloran estos nucleos
+        </script>
+    </body>
+
+</html>
