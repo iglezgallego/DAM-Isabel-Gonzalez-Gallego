@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <!-- cargamos JQuery -->
+        <script src= "js/jquery.js"></script>
+        <!-- cargamos JQuery UI minificado -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- cargamos los CCS de jquery ui -->
+        <link rel = "Stylesheet" href ="js/jquery-ui.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.structure.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.theme.min.css">
+        <style>
+            ul{
+                list-style-type:none; padding:0px; margin:0px;
+            }
+            li{
+               width: 300px;
+                border:1px solid purple;
+                padding: 10px;
+            }
+            /* con ui.selected cojo el elemento que esta seleccionado */
+            .ui-selected{
+                background:purple;
+                color:white;
+            }  
+        </style>
+        <script>
+            //espera a que el documento este cargado para ejecutar la funcion
+            $(document).ready(function(){
+               $(".seleccionable").selectable(); 
+            })
+        </script>
+    </head>
+    <body>
+        <!-- Trabajamos con libreria SELECTABLE -->
+         <!-- Podemos redimensionar y editar un cuadro de texto -->
+        <ul class = "seleccionable">
+            <li>Uno</li>
+             <li>Dos</li>
+             <li>Tres</li>
+        </ul>
+        
+    </body>
+
+</html>

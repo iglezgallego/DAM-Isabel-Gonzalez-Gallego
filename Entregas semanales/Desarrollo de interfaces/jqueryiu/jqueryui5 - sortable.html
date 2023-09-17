@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <!-- cargamos JQuery -->
+        <script src= "js/jquery.js"></script>
+        <!-- cargamos JQuery UI minificado -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- cargamos los CCS de jquery ui -->
+        <link rel = "Stylesheet" href ="js/jquery-ui.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.structure.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.theme.min.css">
+        <style>
+            li{
+                /* border: 1px solid purple; */
+            }
+        </style>
+        <script>
+            
+            //espera a que el documento este cargado para ejecutar la funcion
+            $(document).ready(function(){
+               $(".ordenable").sortable();
+                //cuando le paso el raton por encima aparezca el icono
+                $(".ordenable li").hover(function(){
+                    $(this).find("span").addClass("ui-icon ui-icon-caret-2-n-s")
+                //cuando quite el raton de encima desparezca el icono
+                },function(){
+                    $(this).find("span").removeClass("ui-icon ui-icon-caret-2-n-s")
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <!-- Trabajamos con libreria SORTABLE -->
+         <!-- Podemos reordenar los elementos de una lista -->
+        <ul class = "ordenable">
+            <li>Pan<span></span></li>
+            <li>Aceite<span></span></li>
+            <li>Arroz<span></span></li>
+            <li>Tomates<span></span></li>
+            <li>Sal<span></span></li>
+        </ul>
+    </body>
+
+</html>

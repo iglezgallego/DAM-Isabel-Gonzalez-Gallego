@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <!-- cargamos JQuery -->
+        <script src= "js/jquery.js"></script>
+        <!-- cargamos JQuery UI minificado -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- cargamos los demás elementos de jquery ui -->
+        <script src="js/jquery-ui.min.css"></script>
+        <script src="js/jquery-ui.structure.min.css"></script>
+        <script src="js/jquery-ui.theme.min.css"></script>
+        <style>
+            #mueveme{
+                width:200px;
+                height:200px;
+                background:#B48CFA;
+            } 
+            #mueveme2{
+                width:100px;
+                height:100px;
+                background:#8CABFA;
+            } 
+            #mueveme3{
+                width:150px;
+                height:150px;
+                background:#E08CFA;
+            } 
+        </style>
+        <script>
+            //espera a que el documento este cargado para ejecutar la funcion
+            $(document).ready(function(){
+                //LIBRERIA DRAGGABLE para que podamos arrastrar el elemento
+                //el parámetro opacity hace que arrastrar el elemento cambie la opacidad
+                //el elemento revert hace que el elemento vuelva a su posicion original a la velocidad que le indiques
+                $(".movible").draggable({
+                    opacity:0.35,
+                    revert:true, revertDuration: 1000
+                });
+                
+            })
+        </script>
+    </head>
+    <body>
+        <!-- Trabajamos con libreria draggable -->
+        <div id="mueveme" class="movible"></div>
+        <div id="mueveme2" class="movible"></div>
+        <div id="mueveme3" class="movible"></div>
+    </body>
+
+</html>

@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <!-- cargamos JQuery -->
+        <script src= "js/jquery.js"></script>
+        <!-- cargamos JQuery UI minificado -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- cargamos los CCS de jquery ui -->
+        <link rel = "Stylesheet" href ="js/jquery-ui.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.structure.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.theme.min.css">
+        <style>
+            #mueveme{
+                width:200px;
+                height:200px;
+                background:#B48CFA;
+            } 
+            #mueveme2{
+                width:100px;
+                height:100px;
+                background:#8CABFA;
+            } 
+            #mueveme3{
+                width:150px;
+                height:150px;
+                background:#E08CFA;
+            } 
+            #destino{
+                width:400px;
+                height:400px;
+                border:1px solid black;
+            }
+            
+        </style>
+        <script>
+            //espera a que el documento este cargado para ejecutar la funcion
+            $(document).ready(function(){
+                //LIBRERIA DRAGGABLE para que podamos arrastrar el elemento
+                //el parámetro opacity hace que arrastrar el elemento cambie la opacidad
+                $(".movible").draggable({opacity:0.35,})
+                //LIBRERIA DROPPABLE crea un elemento donde soltar el elemento arrastrado y que sucedan cosas cuando eso pase 
+                $("#destino").droppable({
+                    drop:function(event,ui){
+                        console.log(event)
+                        //obtenemos el id de el elemento que soltemos
+                        console.log(ui.draggable[0].getAttribute("id"))
+                        console.log("Estoy en mi casa")
+                        //this cambia a droppable 
+                        //selecciono el id del elemento draggable y le decimos que nos cambie el borde cuando este dentro del elemento droppable
+                        $("#"+ui.draggable[0].getAttribute("id")).css("border","5px solid black")
+                        //cambiamos el color de fondo del elemento droppable
+                        $(this).css("background","#9AE9F6")
+                        }
+                    });
+            })
+        </script>
+    </head>
+    <body>
+        <!-- Trabajamos con libreria draggable -->
+        <div id="mueveme" class="movible"></div>
+        <div id="mueveme2" class="movible"></div>
+        <div id="mueveme3" class="movible"></div>
+        
+        <div id="destino"></div>
+    </body>
+
+</html>

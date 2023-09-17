@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <!-- cargamos JQuery -->
+        <script src= "js/jquery.js"></script>
+        <!-- cargamos JQuery UI minificado -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- cargamos los CCS de jquery ui -->
+        <link rel = "Stylesheet" href ="js/jquery-ui.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.structure.min.css">
+        <link rel = "Stylesheet" href ="js/jquery-ui.theme.min.css">
+        <style>
+            #redimensioname{
+                width: 500px;
+                height: 500px;
+                border:1px solid brown;
+                padding:20px;
+                outline:none;
+                font-family:sans-serif;
+            }
+        </style>
+        <script>
+            //espera a que el documento este cargado para ejecutar la funcion
+            $(document).ready(function(){
+                $("#redimensioname").draggable()
+               $("#redimensioname").resizable()
+            })
+        </script>
+    </head>
+    <body>
+        <!-- Trabajamos con libreria RESIZABLE -->
+         <!-- Podemos redimensionar y editar un cuadro de texto -->
+        <div id="redimensioname" contenteditable="true"><b>ISA</b> ALBERTO</div>
+        
+    </body>
+
+</html>
