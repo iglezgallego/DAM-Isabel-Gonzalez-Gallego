@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        
+        <script>
+            //medio de comunicacion multidireccional
+            //Para a ver el uso de un worker
+            
+            //Creo al worker y le digo que use un archivo llamado tarea para su comunicacion
+            var trabajador = new Worker("tarea.js");
+            //Worker es una clase que existe en el navegador web
+            
+            //El hilo principal envía un mensaje al worker diciendo hola para que lleve ese mensaje
+            trabajador.postMessage("hola")
+            //Si quito el postMessage no habrá comunicacion
+            
+            //El worker recibe el mensaje y usa onmessage para decirle al hilo principal lo que quiere
+            trabajador.onmessage = function(datos){
+                //el hilo principal escucha y cuando recibe el mensaje del worker muestra el siguiente mensaje por pantalla
+                console.log("el trabajador ha dicho algo:")
+                console.log(datos.data)
+            }
+        </script>
+    </body>
+
+</html>

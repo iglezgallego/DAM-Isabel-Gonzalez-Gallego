@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+            //tengo que pasar esta variable edad como datos a tarea5
+            var edad = 31;
+            var nombre = "Isabel"
+            //Pasamos el JSON a tarea5
+            var json = {edad:31,nombre:"Isabel"}
+            
+            //Saco el numero de nucleos que tiene mi ordenador para que cada worker se coloque en uno y usemos todos
+            var numeroDeNucleos = navigator.hardwareConcurrency;
+            console.log("El ordenador que estas usando tiene "+numeroDeNucleos+" núcleos")
+            //Creo un conjunto de Workers tantos como nucleos de procesamiento tengo en el sistema
+            var trabajador = new Array();
+            for(var i = 0; i<numeroDeNucleos;i++){
+                trabajador[i] = new Worker ("tarea5.js")
+                //le paso el dato edad o el json 
+                trabajador[i].postMessage(json);
+                trabajador[i].onmessage = function(datos){
+                    console.log(datos.data)
+                }
+            }
+            
+        </script>
+    </body>
+
+</html>

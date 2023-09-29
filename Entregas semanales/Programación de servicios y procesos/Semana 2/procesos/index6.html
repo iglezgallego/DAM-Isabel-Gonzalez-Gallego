@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <style>
+            body{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="lienzo" width=2048 height=2048></canvas>
+        <script>
+        //creo un lienzo donde dibujar
+        var contexto = document.getElementById("lienzo").getContext("2d")
+        //creo un nuevo objeto tipo imagen
+        var foto = new Image();
+        //cargo la imagen
+        foto.src = "ciri.jpg"
+            
+        //saco el tiempo de inicio
+        const tiempoInicio = Date.now()
+        //Ejecuta la funcion con retraso de 2s para que le de tiempo al programa a cargar la imagen    
+        setTimeout(function(){
+            //dibuja la imagen en el lienzo
+            contexto.drawImage(foto,0,0)
+            //atrapo todos los pixeles de 0 a 2048 en una matriz
+            var pixeles = contexto.getImageData(0,0,2048,2048)
+            //recorrer imagen cada 4 bloques ya que 4 piezas de contenido representa 1px
+            for(var i = 0;i<pixeles.data.length;i+=4){
+                //invierte el canal rojo de la imagen
+                pixeles.data[i] = 255-pixeles.data[i];
+                //invierte el canal azul de la imagen
+                pixeles.data[i+1] = 255-pixeles.data[i+1];
+                //invierte el canal verde de la imagen
+                pixeles.data[i+2] = 255-pixeles.data[i+2];
+            }
+            //ponemos la imagen modificada dentro del lienzo
+            contexto.putImageData(pixeles,0,0)
+            //calcula el tiempo final
+            const tiempoFinal = Date.now()
+            //Muestra por pantalla el tiempo requerido
+            console.log("el tiempo requerido para calcular este programa ha sido de "+(tiempoFinal - tiempoInicio))
+        },2000)
+        
+        </script>
+    </body>
+</html>

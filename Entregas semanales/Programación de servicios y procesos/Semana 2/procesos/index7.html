@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <style>
+            body{
+                text-align: center;
+            }
+            /* un canvas encima del otro */
+            #contienecanvas{
+                width: 2048px;
+                height: 2048px;
+                position:relative;
+                float:left;
+            }
+            #contienecanvas canvas{
+                position:absolute;
+                top:0px;
+                left:0px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Creo un lienzo -->
+        <canvas id="lienzo" width=2048 height=2048></canvas>
+        <div id="contienecanvas">
+            <!-- Creo el liezo destino lienzo -->
+            <canvas id="lienzodestino" width=2048 height=2048></canvas>
+            <!-- Creo un tercer lienzo para los buckets -->
+            <canvas id="lienzobuckets" width=2048 height=2048></canvas>
+        </div>
+       
+        <script>
+        //esta variable va a almacenar la anchura del cuadro de comparación
+        var anchura = 1;
+        var umbral = 15;
+        //modifico la anchura del bucket para ver cuanto tardar de mas o de menos
+        var anchurabucket = 64;
+        var anchura = 2048;
+        var altura = 2048;
+        var x = 0;
+        var y = 0;
+        //creo el contexto de los lienzos  
+        var contexto = document.getElementById("lienzo").getContext("2d")
+        var contextodestino = document.getElementById("lienzodestino").getContext("2d")
+        var contextobuckets = document.getElementById("lienzobuckets").getContext("2d")
+        var temporizador;
+        
+        //creo un nuevo objeto tipo imagen
+        var foto = new Image();
+        //cargo la imagen
+        foto.src = "ciri.jpg"
+        
+        //Creo una coleccion de workers
+        var trabajador = new Array();
+            
+        //Ejecuta la funcion con retraso de 2 s para que le de tiempo al programa al procesar 
+        setTimeout(function(){
+            //saco el tiempo de inicio
+            const tiempoInicio = Date.now()
+            //dibuja la imagen en el lienzo
+            contexto.drawImage(foto,0,0)
+            
+            //numero de trabajadores sera igual al numero de nucleos
+            numerotrabajadores = navigator.hardwareConcurrency*2;
+            //itero en cada uno de los trabajadores 
+            for(var i=0;i<numerotrabajadores;i++){
+                //creo tantos trabajadores como nucleos tenga
+                trabajador[i] = new Worker("tarea7.js");
+                
+                //recibo el mensaje de vuelta para cada uno de los trabajadores
+                trabajador[i].onmessage = function(datos,i){
+                    //console.log(datos)
+                    //ponemos la imagen modificada dentro del lienzo
+                    contextodestino.putImageData(datos.data.resultado,datos.data.mix,datos.data.miy);
+                    x+=anchurabucket;
+                    if(x > 2048){
+                        x=0;y+=anchurabucket;
+                    }
+                    if(y < 2048){
+                        //console.log("voy a lanzar con: "+i+"-"+x+"-"+y)
+                        bucle(datos.data.miidworker,x,y)
+                    }else{
+                        //capturo el tiempo de finalización del programa
+                        const tiempoFinal = Date.now()
+                        //Muestro el tiempo que ha tardado el programa calculando la diferencia entre los dos tiempos
+                        console.log("el tiempo requerido para calcular este programa ha sido de :"+(tiempoFinal - tiempoInicio));
+                    }
+
+                } 
+                bucle(i,x,y)
+            }
+
+            
+            //temporizador = setTimeout("bucle("+x+","+y+")",1000)
+            //calcula el tiempo final
+            const tiempoFinal = Date.now()
+            //Muestra por pantalla el tiempo requerido
+            //console.log("el tiempo requerido para calcular este programa ha sido de "+(tiempoFinal - tiempoInicio))
+            },2000) 
+            
+            function bucle(i,x,y){
+                var indice = i
+                contextobuckets.fillRect(x,y,anchurabucket,anchurabucket);
+                contextobuckets.clearRect(x+2,y+2,anchurabucket-4,anchurabucket-4);
+                //console.log("en el bucle devuelvo: "+i+"-"+x+"-"+y)
+                
+                //Mete toda la informacion de los pixeles en una variable
+                var pixeles = contexto.getImageData(x,y,anchurabucket,anchurabucket);
+                //Mete la info correspondiente al lienzo del destino
+                var pixelesdestino = contextodestino.getImageData(0,0,anchurabucket,anchurabucket)
+                json = {px:pixeles,pxdst:pixelesdestino,mix:x,miy:y,miumbral:umbral,mianchurabucket:anchurabucket,idworker:i}
+                //console.log("el indice del trabajador es: "+indice)
+                //envio el json a través del worker
+                trabajador[indice].postMessage(json)
+                
+                
+            
+            //clearTimeout(temporizador);    
+            
+            }
+            
+            
+        </script>
+    </body>
+</html>

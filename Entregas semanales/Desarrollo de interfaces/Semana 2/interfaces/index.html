@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- Cargo JQuery -->
+        <script src="lib/code.jquery.com_jquery-3.7.1.min.js"></script>
+        <!-- Cargo JQuery UI js -->
+        <script src="lib/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+        <!-- Cargo JQuery UI css -->
+        <link rel="Stylesheet" href="lib/jquery-ui-1.13.2.custom/jquery-ui.css">
+        <!-- Cargo estilo.css -->
+        <link rel="Stylesheet" href="css/estilo.css">
+        <!-- cargo la libreria SELECT2 como CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
+        <script>
+            //cuando el documento este preparado
+            $(document).ready(function(){
+                //lo que tenga el id tabs, tendra el metodo tabs de jqueryUI
+                $("#tabs").tabs();
+                //lo que tenga el id biblioteca y parametros tendra el metodo accordion de jqueryUI
+                $("#biblioteca").accordion();
+                $("#parametros").accordion();
+                //lo que tenga el id menu tendra el metodo menu de jqueryUI
+                $("#menu").menu();
+                //lo que tenga class nodo tendra el metodo draggable de jqueryUI
+                $(".nodo").draggable();
+                //lo que tenga class dialogo tendra el metodo dialog de jqueryUI y que esté oculto
+                $(".dialogo").dialog();
+                $(".dialogo").dialog('close');
+                //cuando en id espacio haga click en el boton derecho
+                $("#inicio").contextmenu(function(event){
+                    //no salga el menu contextual
+                    event.preventDefault()
+                    //mensaje por consola
+                    console.log("menu contextual");
+                    //se abra el cuadro de dialogo
+                    $(".dialogo").dialog('open');
+                })
+                //lo que tenga la clase select 2 sea un select2 de la libreria select2
+                //es un select que a la vez es un buscador 
+                $(".select2").select2();
+                
+            })
+        </script>
+    </head>
+    <body>
+        <div class="dialogo">
+            <select class="select2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+        <div id="app">
+            <!-- TABLA DEL MENU -->
+            <table border=0 width=100% height=100%>
+                <!-- MENU - MENU JQUERYUI -->
+                <tr height=20px>
+                    <td>   
+                        <ul id="menu">
+                          <li>
+                            <div>Menú</div>
+                          </li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- TABLA DEL CONTENIDO -->
+                <tr>
+                    <td>
+                        <table border=0 width=100% height=100%>
+                            
+                            <!--BIBLIOTECA - ACCORDION -->
+                            <td width=200px>
+                                <div id="biblioteca">
+                                  <h3>Section 1</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                      </div>
+                                  <h3>Section 2</h3>
+                                    <div>
+                                        <p>
+                                        </p>
+                                    </div>
+                                  <h3>Section 3</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                            <ul>
+                                              <li></li>
+                                              <li></li>
+                                              <li></li>
+                                            </ul>
+                                      </div>
+                                  <h3>Section 4</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <!--PAGINA PRINCIPAL - TABS -->
+                            <td>
+                                <div id="tabs">
+                                  <ul>
+                                    <li><a href="#tabs-1"> Inicio </a></li>
+                                    <li><a href="#tabs-2"> Contenido </a></li>
+                                    <li><a href="#tabs-3"> Opciones </a></li>
+                                  </ul>
+                                    <!--Ponemos los tabs de jqueryUI -->
+                                      <div id="tabs-1">
+                                        <div id="inicio" class="inicio">
+                                            <!--Nodo 1 -->
+                                            <div id="dialog" title="Basic dialog" class="nodo">
+                                                <p>
+                                                    NODO
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            <!--Nodo 2 -->
+                                            <div id="dialog" title="Basic dialog" class="nodo">
+                                                <p>
+                                                    NODO
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            <!--Nodo 3 -->
+                                            <div id="dialog" title="Basic dialog" class="nodo">
+                                                <p>
+                                                    NODO
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            <!--Nodo 3 -->
+                                            <div id="dialog" title="Basic dialog" class="nodo">
+                                                <p>
+                                                    NODO
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            <!-- fin nodos -->
+                                        </div>
+                                      </div>
+                                      <div id="tabs-2">
+                                            <p></p>
+                                      </div>
+                                      <div id="tabs-3">
+                                            <p></p>
+                                      </div>
+                                </div>
+                            </td>
+                            
+                            <!--PARÁMETROS - ACCORDION -->
+                            <td width=200px>
+                                <div id="parametros">
+                                  <h3>Section 1</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                      </div>
+                                  <h3>Section 2</h3>
+                                    <div>
+                                        <p>
+                                        </p>
+                                    </div>
+                                  <h3>Section 3</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                            <ul>
+                                              <li></li>
+                                              <li></li>
+                                              <li></li>
+                                            </ul>
+                                      </div>
+                                  <h3>Section 4</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                    </div>
+                                </div>
+                            </td>
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    
+    </body>
+
+</html>
