@@ -1,0 +1,343 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- Cargo JQuery -->
+        <script src="lib/code.jquery.com_jquery-3.7.1.min.js"></script>
+        <!-- Cargo JQuery UI js -->
+        <script src="lib/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+        <!-- Cargo JQuery UI css -->
+        <link rel="Stylesheet" href="lib/jquery-ui-1.13.2.custom/jquery-ui.css">
+        <!-- Cargo estilo.css -->
+        <link rel="Stylesheet" href="css/estilo.css">
+        <!-- cargo la libreria SELECT2 como CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- cargo la libreria jQuery connections -->
+        <script src="lib/jquery-connections-gh-pages/jquery.connections.js"></script>
+        
+        <script>
+            var ejecucion = new Array();
+            //cuando el documento este preparado
+            $(document).ready(function(){
+                //cargar las posiciones de los nodos guardados en localStorage
+                for(var i = 0; i < localStorage.length; i++){
+                    clave = localStorage.key(i);
+                    valor = localStorage.getItem(localStorage.key(i));
+                    //selecciono el nodo cuyo id es igual a la clave y me quedo con el elemento 1 de la matriz
+                    $(".nodo[id='"+clave+"']").css("left", valor.split(",")[0])
+                    //y me quedo con el elemento 2 de la matriz
+                    $(".nodo[id='"+clave+"']").css("top", valor.split(",")[1])
+                }
+                //cada vez que cargue nos recupere las conexiones
+                $(".nodo").each(function(){
+                    console.log($(this).attr("exectarget"))
+                    if($(this).attr("exectarget") != ''){
+                        $(this).connections({to: ".nodo[id='"+$(this).attr("exectarget")+"']" }); 
+                    }
+                })
+                
+                //lo que tenga el id tabs, tendra el metodo tabs de jqueryUI
+                $("#tabs").tabs();
+                //lo que tenga el id biblioteca y parametros tendra el metodo accordion de jqueryUI
+                $("#biblioteca").accordion();
+                $("#parametros").accordion();
+                //lo que tenga el id menu tendra el metodo menu de jqueryUI
+                $("#menu").menu();
+                //lo que tenga class nodo tendra el metodo draggable de jqueryUI
+                $(".nodo").draggable({
+                    start: function(){
+                        
+                    },
+                    //siempre que este moviendo el elemento
+                    drag:function(){
+                        //borra la conexiones anteriores
+                        $("connection").remove();
+                        //Para cada uno de los nodos
+                        $(".nodo").each(function(){
+                            console.log($(this).attr("exectarget"))
+                           //si existe un valor de exectarget
+                            if($(this).attr("exectarget") != ''){
+                                //conectar ese nodo con el nodo que corresponde
+                                $(this).connections({to: ".nodo[id='"+$(this).attr("exectarget")+"']" }); 
+                            }
+                        })
+                        
+                    },
+                    stop:function(){
+                    
+                    }
+                                     
+                });
+                //lo que tenga class dialogo tendra el metodo dialog de jqueryUI y que esté oculto
+                $(".dialogo").dialog();
+                $(".dialogo").dialog('close');
+                //cuando en id espacio haga click en el boton derecho
+                $("#inicio").contextmenu(function(event){
+                    //no salga el menu contextual
+                    event.preventDefault()
+                    //mensaje por consola
+                    console.log("menu contextual");
+                    //se abra el cuadro de dialogo
+                    $(".dialogo").dialog('open');
+                })
+                //lo que tenga la clase select 2 sea un select2 de la libreria select2
+                //es un select que a la vez es un buscador 
+                $(".select2").select2();
+                //lo que sea un button que sea un button de jQueryUI para el estilo
+                $("button").button();
+                //cuando pulse el boton play
+                $("#play").click(function(){
+                    //creo un contador para controlar el bucle
+                    contador = 0;
+                    //primero, el array ejecucion es igual a nada
+                    ejecucion = []
+                    //el primer elemento del array será el id del nodo beginplay
+                    ejecucion[0] = $("#beginPlay").attr("id")
+                    //destino sera el valor de exectarget de beginPlay
+                    destino = $("#beginPlay").attr("exectarget")
+                    nodoactual = $("#beginPlay")
+                    //para averiguar cuantos hay. Mientras id del nodoactual de beginplay contenga algo
+                     while(nodoactual.attr("id") != "undefined"){
+                            //destino es el exectarget del nodo inicial 
+                            destino = $(".nodo[id='"+nodoactual.attr("exectarget")+"']")
+                            //nodo actual es el exectarget del nodo inicial
+                            nodoactual = $(".nodo[id='"+nodoactual.attr("exectarget")+"']")
+                            //pon dentro del array el id del nodo actual
+                            ejecucion.push(nodoactual.attr("id"))
+                            //aumento en 1 el contador 
+                            contador++;
+                            console.log("exectarget es :"+nodoactual.attr("exectarget"))
+                            //para controlar terminar el bucle, si contador es mayor que 100 o exectarget es igual a nada
+                             if(contador > 100 || typeof(nodoactual.attr("exectarget")) == "undefined"){
+                                 break;
+                                }
+                        } 
+                        console.log(ejecucion)
+                })
+                //Cuando haga click en save
+                $("#save").click(function(){
+                    //Para cada uno de los nodos
+                    $(".nodo").each(function(){
+                        //Guarda en localStorge el atributo id y su posicion
+                        localStorage.setItem($(this).attr("id"), $(this).css("left")+","+$(this).css("top"));
+                    })
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="dialogo">
+            <select class="select2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+        <div id="app">
+            <!-- TABLA DEL MENU -->
+            <table border=0 width=100% height=100%>
+                <!-- MENU - MENU JQUERYUI -->
+                <tr height=20px>
+                    <td>   
+                        <ul id="menu">
+                          <li>
+                            <div>Menú</div>
+                          </li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- BOTON DE PLAY Y BOTON DE GUARDAR -->
+                <tr height=20px>
+                    <td>
+                        <button id="play"><img src="lib/bootstrap-icons-1.11.1/play-circle.svg" alt="Bootstrap" width="32" height="32"></button>
+                        <button id="save"><img src="lib/bootstrap-icons-1.11.1/save2.svg" alt="Bootstrap" width="32" height="32"></button>
+                    </td>
+                </tr>
+                <!-- TABLA DEL CONTENIDO -->
+                <tr>
+                    <td>
+                        <table border=0 width=100% height=100%>
+                            
+                            <!--BIBLIOTECA - ACCORDION -->
+                            <td width=200px>
+                                <div id="biblioteca">
+                                  <h3>Section 1</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                      </div>
+                                  <h3>Section 2</h3>
+                                    <div>
+                                        <p>
+                                        </p>
+                                    </div>
+                                  <h3>Section 3</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                            <ul>
+                                              <li></li>
+                                              <li></li>
+                                              <li></li>
+                                            </ul>
+                                      </div>
+                                  <h3>Section 4</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <!--PAGINA PRINCIPAL - TABS -->
+                            <td>
+                                <div id="tabs">
+                                  <ul>
+                                    <li><a href="#tabs-1"> Inicio </a></li>
+                                    <li><a href="#tabs-2"> Contenido </a></li>
+                                    <li><a href="#tabs-3"> Opciones </a></li>
+                                  </ul>
+                                    <!--Ponemos los tabs de jqueryUI -->
+                                      <div id="tabs-1">
+                                        <div id="inicio" class="inicio">
+                                            
+                                            <!--BeginPlay nodo -->
+                                            <div title="Basic dialog" class="nodo" id="beginPlay" exectarget="nodo1">
+                                                <!--exectarjet indica el punto de unión -->
+                                                <p>
+                                                    BeginPlay
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector" id="incio"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            
+                                            <!--Nodo 1 -->
+                                            <div title="Basic dialog" class="nodo" id="nodo1" exectarget="nodo2">
+                                                <!--exectarjet indica el punto de unión -->
+                                                <p>
+                                                    Nodo 1
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector" id="incio"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            
+                                            <!--Nodo 2 -->
+                                            <div title="Basic dialog" class="nodo" id="nodo2" exectarget="nodo3">
+                                                <p>
+                                                    NODO 2
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector" id="final"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            
+                                            <!--Nodo 3 -->
+                                            <div title="Basic dialog" class="nodo" id="nodo3" exectarget="nodo4">
+                                                <p>
+                                                    NODO 3
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            
+                                            <!--Nodo 4 -->
+                                            <div title="Basic dialog" class="nodo" id="nodo4">
+                                                <p>
+                                                    NODO 4
+                                                </p>
+                                                    <div class="entradas">
+                                                        <div class="ejecucion"><span class="conector"></span>Exec</div>
+                                                        <div class="parametro"><span class="conector"></span>param1</div>
+                                                        <div class="parametro"><span class="conector"></span>param2</div>
+                                                    </div>
+                                                    <div class="salidas">
+                                                        <div class="ejecucion">Exec<span class="conector"></span></div>
+                                                        <div class="parametro">param1<span class="conector"></span></div>
+                                                        <div class="parametro">param2<span class="conector"></span></div>
+                                                    </div>
+                                            </div>
+                                            <!-- fin nodos -->
+                                            
+                                        </div>
+                                      </div>
+                                      <div id="tabs-2">
+                                            <p></p>
+                                      </div>
+                                      <div id="tabs-3">
+                                            <p></p>
+                                      </div>
+                                </div>
+                            </td>
+                            
+                            <!--PARÁMETROS - ACCORDION -->
+                            <td width=200px>
+                                <div id="parametros">
+                                  <h3>Section 1</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                      </div>
+                                  <h3>Section 2</h3>
+                                    <div>
+                                        <p>
+                                        </p>
+                                    </div>
+                                  <h3>Section 3</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                            <ul>
+                                              <li></li>
+                                              <li></li>
+                                              <li></li>
+                                            </ul>
+                                      </div>
+                                  <h3>Section 4</h3>
+                                      <div>
+                                            <p>
+                                            </p>
+                                    </div>
+                                </div>
+                            </td>
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    
+    </body>
+
+</html>

@@ -1,0 +1,66 @@
+<html>
+    <head>
+    
+    </head>
+    <body>
+        <canvas id="lienzo" width=512px height="512px"></canvas>
+        <script>
+            //defino una serie de trabajadores
+            var numerotrabajadores = 75;
+            //los trabajadores serán un array donde en cada uno habrá un worker
+            var trabajadores = new Array();
+            //Los personajes serán un array
+            var personajes = new Array();
+            
+            //especifica un contexto en el cual se va a dibujar
+            var contexto = document.getElementById("lienzo").getContext("2d")
+            //creo temporizador vacio
+            var temporizador;
+            
+            //para cada uno de los trabajadores
+            for(var i = 0;i<numerotrabajadores;i++){
+                //asigno un worker a cada trabajador 
+                trabajadores[i] = new Worker("tarea8.js");
+                //envia el id de cada trabajador
+                trabajadores[i].postMessage({id:i})
+                //cuando nacen los personajes trae la información
+                personajes[i] = {x:0,y:0,r:0,g:0,b:0,otros:0,id:i}
+                //recibe la informacion de donde se encuentran los puntos
+                trabajadores[i].onmessage = function(datos){
+                    personajes[datos.data.id].x = datos.data.x
+                    personajes[datos.data.id].y = datos.data.y
+                    personajes[datos.data.id].r = datos.data.mir
+                    personajes[datos.data.id].g = datos.data.mig
+                    personajes[datos.data.id].b = datos.data.mib
+                    personajes[datos.data.id].tam = datos.data.tam
+                }
+            }
+            //trabajamos con un bucle en el principal y otros bucles en tarea
+            //llama la funcion de inicio
+            inicio();
+            //define la funcion de inicio
+            function inicio(){
+                //dentro de un segundo se ejecutará el bucle
+                temporizador = setTimeout("bucle()",1000)
+            }
+            //define la funcion de bucle
+            function bucle(){
+                //mascara para que los personajes dejen un rastro
+                contexto.fillStyle = "rgba(255,255,255,0.1)"
+                contexto.fillRect(0,0,512,512)
+                for(var i=0;i<numerotrabajadores;i++){
+                    //Pinta los personajes
+                    contexto.fillStyle = "rgb("+personajes[i].r+","+personajes[i].g+","+personajes[i].b+")"
+                    contexto.fillRect(personajes[i].x,personajes[i].y,personajes[i].tam,personajes[i].tam)
+                    //a cada uno de los personajes le paso lista de los otros personajes para que pueda conocer informacion acerca de otros workers
+                    trabajadores[i].postMessage({id:i,otros:personajes})
+                }
+                
+                //elimino el temporizador anterior para refrescarlo
+                clearTimeout(temporizador)
+                //creo un nuevo temporizador recursivo que llama a la misma función
+                temporizador = setTimeout("bucle()",33)
+            }
+        </script>
+    </body>
+</html>
