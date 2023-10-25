@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            html, body{
+                padding:0px;
+                margin:0px;
+                overflow: hidden;
+            }
+            canvas{
+                border:1px solid black;
+                /* Para quitar antialias */
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -o-crisp-edges;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: pixelated;
+                image-rendering: optimize-contrast;
+                -ms-interpolation-mode: nearest-neighbor;
+            }
+            
+        </style> 
+    </head>
+    <body>
+        <canvas width=512px height=512px id="lienzo"></canvas>
+        <script>
+            //cojo la anchura y la altura de las dimensiones de la pantalla
+            var anchura = window.innerWidth;
+            var altura = window.innerHeight;
+            document.getElementById("lienzo").width = anchura;
+            document.getElementById("lienzo").height = altura;
+            //creamos el contexto del lienzo
+            var contexto = document.getElementById("lienzo").getContext("2d");
+            
+            //Carga inicial de pixeles negros
+            contexto.fillStyle = "rgb(255,255,255)"
+            contexto.fillRect(0,0,anchura,altura)
+            var datoscanvas = contexto.getImageData(0,0,anchura,altura)
+            
+            //Creamos pixeles blancos y negros aleatorios por el lienzo que seran la celulas
+            for(var i = 0;i<datoscanvas.data.length;i+=4){
+                if(Math.random() < 0.2){
+                    //componente rojo
+                    datoscanvas.data[i] = 0;
+                    //componente verde
+                    datoscanvas.data[i+1] = 0;
+                    //componente azul
+                    datoscanvas.data[i+2] = 0;
+                }else{
+                    datoscanvas.data[i] = 255;
+                    datoscanvas.data[i+2] = 255;
+                    datoscanvas.data[i+3] = 255;
+                }
+            }
+            contexto.putImageData(datoscanvas,0,0)
+            //creo un temporizador para iniciar la funcion bucle
+            var temporizador = setTimeout("bucle()",1000);
+            
+            //defino la funcion bucle
+            function bucle(){
+                //cojo la información que tengo
+                datoscanvas = contexto.getImageData(0,0,anchura,altura)
+                //creo la variable datoscanvas temporal para no trabajar con el mismo contexto
+                datoscanvastemp = contexto.getImageData(0,0,anchura,altura)
+                //para cada una de las celulas quiero ver las 8 celulas que tiene a su alrededor
+                for(var i = 0;i<datoscanvastemp.data.length;i+=4){
+                    var numerovivas = 0;
+                    //solo estoy mirando el componente rojo i
+                    //la celula de arriba a la izquierda está viva
+                    if(datoscanvastemp.data[i-anchura*4-4] == 0){numerovivas++;}
+                    //la celula de arriba está viva
+                    if(datoscanvastemp.data[i-anchura*4] == 0){numerovivas++;}
+                    //la celula de arriba a la derecha está viva
+                    if(datoscanvastemp.data[i-anchura*4+4] == 0){numerovivas++;}
+                    //celula de la izquierda
+                    if(datoscanvastemp.data[i-4] == 0){numerovivas++;}
+                    //celula de la derecha
+                    if(datoscanvastemp.data[i+4] == 0){numerovivas++;}
+                    //La celula de abajo a la izquierda
+                    if(datoscanvastemp.data[i+anchura*4-4] == 0){numerovivas++;}
+                    //La celula de abajo
+                    if(datoscanvastemp.data[i+anchura*4] == 0){numerovivas++;}
+                    //la celula de abajo a la derecha
+                    if(datoscanvastemp.data[i+anchura*4+4] == 0){numerovivas++;}
+            
+                    //si la celula es blanca, es decir, esta muerta
+                    if(datoscanvastemp.data[i] == 255 && numerovivas == 3){
+                        //la celula vuelve a vivir en los 3 componentes
+                        datoscanvas.data[i] = 0;
+                        datoscanvas.data[i+1] = 0;
+                        datoscanvas.data[i+2] = 0;
+                    }
+                    //si la celula está viva
+                    if(datoscanvastemp.data[i] == 0 ){
+                        //si hay dos o tres celulas vivas
+                        if((numerovivas == 2 || numerovivas == 3)){
+                            //en ese caso están vivas
+                            datoscanvas.data[i] = 0;
+                            datoscanvas.data[i+1] = 0;
+                            datoscanvas.data[i+2] = 0;
+                        //en caso contrario 
+                        }else{
+                            //las celulas son blancas, es decir, mueren
+                            datoscanvas.data[i] = 255;
+                            datoscanvas.data[i+1] = 255;
+                            datoscanvas.data[i+2] = 255;
+                        }
+                    }
+                }
+                
+                //los datos que he modificado los convierto en una imagen
+                contexto.putImageData(datoscanvas,0,0)
+                //limpio el anterior temporizador
+                clearTimeout(temporizador);
+                //vuelvo a arrancar el temporizador
+                temporizador = setTimeout("bucle()",100);
+            }
+        </script>
+    
+    </body>
+
+</html>
