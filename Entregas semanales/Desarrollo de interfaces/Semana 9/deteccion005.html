@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Detección de movimiento</title>
+    </head>
+    <body>
+        <!-- creo un canvas con el lienzo -->
+        <canvas id="lienzo" width="640px" height="480px"></canvas>
+        <!-- creo un video -->
+        <video id="video" autoplay></video>
+        <!-- creo un script -->
+        <script>
+            //Traigo los elementos y los guardo en constantes 
+            const video = document.getElementById("video");
+            const lienzo = document.getElementById("lienzo");
+            //Creo el contexto del lienzo
+            const contexto = lienzo.getContext("2d");
+            
+            //Sobre el objeto navigator capturo unicamente el video
+            navigator.mediaDevices.getUserMedia({video:true})
+                //En este caso 
+                .then(function(flujo){
+                    video.srcObject = flujo;
+                
+                })
+                //En el caso de que falle
+                .catch(function(error){
+                    //muestar el error por pantalla
+                    console.log("error: "+error)
+                })
+            //Pinto el video dentro del canvas
+            function videoALienzo(){
+                //dibuja la imagen del video en 0,0, y pongo las dimensiones del lienzo
+                contexto.drawImage(video,0,0,lienzo.width,lienzo.height)
+                //funcion recursiva que se llama a si misma
+                requestAnimationFrame(videoALienzo)
+            }
+            //Cuando al vídeo le de al play 
+            video.addEventListener('play',function(){
+                //ejecuto la función 
+                videoALienzo()
+            })
+        </script>
+    </body>
+
+</html>

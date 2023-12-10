@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Detección de movimiento</title>
+    </head>
+    <body>
+        <!-- creo un canvas con el lienzo -->
+        <canvas id="lienzo" width="640px" height="480px"></canvas>
+        <!-- creo un video -->
+        <video id="video" autoplay></video>
+        <!-- creo un script -->
+        <script>
+            //Traigo los elementos y los guardo en constantes 
+            const video = document.getElementById("video");
+            const lienzo = document.getElementById("lienzo");
+            //Creo el contexto del lienzo
+            const contexto = lienzo.getContext("2d");
+            //Cada cuantos pixeles voy a mirar tanto en horizontal como en vertical
+            const paso = 32;
+            //Variables para los valores nuevos y viejos para poder comparar el color y saber si se ha movido algo
+            var valoresviejos = []
+            var valoresnuevos = []
+            //Sobre el objeto navigator capturo unicamente el video
+            navigator.mediaDevices.getUserMedia({video:true})
+                //En este caso 
+                .then(function(flujo){
+                    video.srcObject = flujo;
+                
+                })
+                //En el caso de que falle
+                .catch(function(error){
+                    //muestar el error por pantalla
+                    console.log("error: "+error)
+                })
+            //Pinto el video dentro del canvas
+            function videoALienzo(){
+                //dibuja la imagen del video en 0,0, y pongo las dimensiones del lienzo
+                contexto.drawImage(video,0,0,lienzo.width,lienzo.height)
+                //Cojo el pixel que está en el medio
+                let pixel = contexto.getImageData(320,240,1,1);
+                //muestra los datos de ese píxel por pantalla, si hay algo negro de valores bajos si hay algo blanco da valores altos
+                console.log(pixel.data[0])
+                //bucle for para recorrer las posiciones horizontales
+                for (let x = 0;x<640;x+=paso){
+                    //for para recorrer las posiciones verticales
+                    for(let y = 0;y<640;y+=paso){
+                    }
+                }
+                //funcion recursiva que se llama a si misma
+                requestAnimationFrame(videoALienzo)
+            }
+            //Cuando al vídeo le de al play 
+            video.addEventListener('play',function(){
+                //ejecuto la función 
+                videoALienzo()
+            })
+        </script>
+    </body>
+
+</html>
