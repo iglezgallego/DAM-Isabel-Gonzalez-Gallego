@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Detección de movimiento</title>
+        <style>
+            html,body{background:black;}
+            video{display:none;}
+            canvas{position:absolute;top:0px;left:0px;}
+            #lienzo2{opacity:0.5;}
+        </style>
+    </head>
+    <body>
+        <!-- creo un canvas con el lienzo -->
+        <canvas id="lienzo" width="640px" height="480px"></canvas>
+         <!-- creo un segundo canvas con otro lienzo -->
+        <canvas id="lienzo2" width="640px" height="480px"></canvas>
+        <!-- creo un video -->
+        <video id="video" autoplay></video>
+        <!-- creo un script -->
+        <script>
+            //Traigo los elementos y los guardo en constantes 
+            const video = document.getElementById("video");
+            const lienzo = document.getElementById("lienzo");
+            const lienzo2 = document.getElementById("lienzo2");
+            
+            //Creo el contexto del lienzo
+            const contexto = lienzo.getContext("2d");
+            //Creo el contexto del lienzo2
+            const contexto2 = lienzo2.getContext("2d");
+            
+            contexto2.fillStyle = "rgba(255,255,255,0.1)"
+            
+            //Cada cuantos pixeles voy a mirar tanto en horizontal como en vertical
+            const paso = 16;
+            //Variables para los valores de los pixeles nuevos y viejos para poder comparar el color y saber si se ha movido algo
+            var pixelesviejos = [];
+            var pixelesnuevos = [];
+            //contador para comparar los pixeles nuevos y los viejos
+            var contador = 0;
+            //Sobre el objeto navigator capturo unicamente el video
+            navigator.mediaDevices.getUserMedia({video:true})
+                //En este caso 
+                .then(function(flujo){
+                    video.srcObject = flujo;
+                
+                })
+                //En el caso de que falle
+                .catch(function(error){
+                    //muestar el error por pantalla
+                    console.log("error: "+error)
+                })
+            //Pinto el video dentro del canvas
+            function videoALienzo(){
+                
+                contexto2.fillRect(0,0,640,480)
+
+                //dibuja la imagen del video en 0,0, y pongo las dimensiones del lienzo
+                contexto.drawImage(video,0,0,lienzo.width,lienzo.height)
+                //Para cada fotograma asigno a los pixeles nuevos los pixeles anteriores
+                pixelesviejos = pixelesnuevos
+                //
+                pixelesnuevos = [];
+                //cojo pixeles nuevos
+                //bucle for para recorrer las posiciones horizontales
+                for (let x = 0;x<640;x+=paso){
+                    //for para recorrer las posiciones verticales
+                    for(let y = 0;y<480;y+=paso){
+                        //Cojo el pixel en cada punto
+                        let pixel = contexto.getImageData(x,y,1,1);
+                        //Almaceno la x y la y 
+                        let datos = []
+                        //Almaceno los pixeles nuevos como un json
+                        pixelesnuevos.push({
+                            data:pixel.data,
+                            x:x,
+                            y:y
+                        })
+                        
+                    }
+                }
+                
+                //ejecuta solo a partir de la segunda vuelta, no cuando contador es 0, ya que no hay pixeles viejos
+                if (contador > 0){
+                    //recorre todos los pixeles
+                    for(let i = 0;i<pixelesnuevos.length;i++){
+                        //recojo los pixeles nuevos y viejos en las variables
+                        let rojonuevo = pixelesnuevos[i].data[0]
+                        let rojoviejo = pixelesviejos[i].data[0]
+                        
+                        //dame la diferencia siempre en valores positivos entre los pixeles nuevos y viejos
+                        let diferencia = Math.abs(rojonuevo-rojoviejo)
+                        
+                        //si la diferencia es mayor que
+                        if(diferencia > 20){
+                            //si detecta movimiento, dibuja un borde alrededor
+                            contexto2.strokeRect(
+                                pixelesnuevos[i].x,
+                                pixelesnuevos[i].y,
+                                paso,
+                                paso)
+                        }
+                    }
+                }
+                //funcion recursiva que se llama a si misma
+                requestAnimationFrame(videoALienzo)
+                contador++;
+            }
+            //Cuando al vídeo le de al play 
+            video.addEventListener('play',function(){
+                //ejecuto la función 
+                videoALienzo()
+            })
+        </script>
+    </body>
+
+</html>

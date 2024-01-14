@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Videojuego</title>
+        <meta charset="UTF-8">
+        <!-- ESTILO DEL LIENZO -->
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+                overflow:hidden;
+            }
+            canvas{
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- CANVAS LIENZO PARA DIBUJAR -->
+        <canvas id="lienzo" width=512px height=512px></canvas>
+        <!-- JAVASCRIPT -->
+        <script>
+            //Para coger un elemento del html segun su id y guardarlo en la variable y crear un contexto para trabajar en dos dimensiones
+            var contexto = document.getElementById("lienzo").getContext("2d");
+            //contexto es una instancia de getContext con sus metodos y sus propiedades
+            
+            
+            // VARIABLES GLOBALES DEL TODO EL PROGRAMA
+            var temporizador;
+            //variables para capturar la dimension de la pantalla y ponerle al lienzo las mismas dimensiones
+            var anchuranavegador = window.innerWidth;
+            var alturanavegador = window.innerHeight;
+            document.getElementById("lienzo").height = alturanavegador;
+            document.getElementById("lienzo").width = anchuranavegador;
+            //CARGAMOS IMAGENES PARA EL VIDEOJUEGO
+            //variable para coger la imagen de la rejilla
+            var imagenrejilla = new Image();
+            imagenrejilla.src = "rejilla.png"
+            //variable para coger la imagen del personaje
+            var imagenpersonaje1 = new Image();
+            imagenpersonaje1.src = "alien.png"
+            //variable para coger la imagen de fondo
+            var imagenfondo = new Image();
+            imagenfondo.src = "fondo2.jpg"
+            
+            //PLANTILLA PARA UN PERSONAJE
+            //Creamos clases para trabajar con programacion orientada a objetos y crear metodos y propiedades
+            class Personaje{
+                //propiedades x y z color que tiene el Personaje al nacer
+                constructor(x,y,z,direccion,direccionisometrica,color,tiemponacimiento){
+                    this.tiemponacimiento = 0;
+                    this.x = Math.random()*anchuranavegador;
+                    this.y = Math.random()*alturanavegador;
+                    //parámetro de direccion hacia la que se mueven los personajes en este caso direccion aleatoria
+                    this.direccion = Math.PI*2*Math.random();
+                    this.direccionverdadera = Math.PI*2*Math.random();
+                    this.direccionisometrica = Math.floor(Math.random()*4);
+                    //this.color = "#B48CFA"
+                }
+                //declaramos el metodo mueve con posiciones aleatorias para gestionar el movimiento del personaje
+                mueve(){
+                    this.tiemponacimiento += 1;
+                    this.x += Math.cos(this.direccion);
+                    this.y += Math.sin(this.direccion);
+                    
+                    //Aqui indicamos al programa que el personaje cambie de direccion cada 100 unidades de vida
+                    
+                    // si tiempo nacimiento cada 100 segundos es igual a 0
+                    if(this.tiemponacimiento % 100 == 0){
+                        //en ese caso cambia la direccion
+                        this.direccionisometrica = Math.floor(Math.random()*4);}
+
+                    //para que la direccion sea isométrica
+                    if(this.direccionisometrica == 0){
+                        this.direccion = 0;
+                        }else if(this.direccionisometrica == 1){
+                            this.direccion = Math.PI/2;
+                        }else if(this.direccionisometrica == 2){
+                            this.direccion = Math.PI;
+                        }else if(this.direccionisometrica == 3){
+                            this.direccion = Math.PI*1.5;    
+                                 }
+                    //para que la direccion de los personajes cambie y no siempre vayan en linea recta
+                    //this.direccion += Math.random()-0.5;
+                    //this.direccion = 0;
+                    
+                    //llamamos al metodo colisiona
+                    this.colisiona();
+                }
+                //declaramos el metodo colisiona para que los personajes reboten en las paredes
+                colisiona(){
+                    if(this.x > anchuranavegador || this.x < 0 || this.y < 0 || this.y > alturanavegador){
+                        //dar la vuelta
+                        this.direccion += Math.PI;
+                    }
+                }
+            }
+            
+            //Creo 100 personajes con sus propiedades y su metodo
+            var numeropersonajes = 100;
+            var arraypersonajes = new Array();
+            
+            
+            inicio();
+            
+            //FUNCION DE INICIALIZACION cargamos todas las condiciones iniciales del juego
+            function inicio(){
+                //Para crear los 100 personajes al inicio del juego. Creo una instancia del objeto o personaje para cada uno de los elementos del array
+                for(var i =0;i<numeropersonajes;i++){
+                    arraypersonajes[i] = new Personaje;
+            }
+                //Lanzo la ejecución del bucle en un tiempo, en este caso 1000 milisegundos
+                temporizador = setTimeout("bucle()",1000);
+            }
+            
+            //FUNCION DE BUCLE cargamos todo lo que se va a ir repetiendo durante el juego
+            function bucle(){
+                //borra el lienzo anterior para que no se forme un rastro
+                contexto.clearRect(0,0,anchuranavegador,alturanavegador);
+                //dibuja la imagen de fondo
+                contexto.drawImage(imagenfondo,0,0,anchuranavegador,alturanavegador);
+                //dibuja la imagen rejilla
+                contexto.drawImage(imagenrejilla,0,0);
+                //iteramos en todo los elementos del array 
+                for(var i =0;i<numeropersonajes;i++){
+                //ejecutamos el metodo mueve a todos los personajes uno a uno
+                arraypersonajes[i].mueve();
+                //Dibujamos a cada uno de los personajes
+                    //drawImage tiene imagen, x, y  opcional anchura y altura de la imagen
+                contexto.drawImage(
+                    imagenpersonaje1,
+                    isox(arraypersonajes[i].x, arraypersonajes[i].y),
+                    isoy(arraypersonajes[i].x, arraypersonajes[i].y),70,70
+                );
+            }
+                
+                //borramos el anterior temporizador
+                clearTimeout(temporizador);
+                //llamamos a un nuevo temporizador para volver a ejecutar el bucle. fotogramas por minuto
+                temporizador = setTimeout("bucle()",33);
+            }
+            
+            //Pasar de vista axonometrica a vista isométrica
+            function isox(x,y){
+                return(x-y);
+            }
+            function isoy(x,y){
+                return((x+y)/2);
+            }
+            
+        </script>
+    </body>
+</html>
