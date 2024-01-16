@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            //cuando el programa cargue
+            window.onload = function(){
+                //creo el contexto del lienzo
+                var contexto = document.getElementById("lienzo").getContext("2d");
+                //cargo la imagen de la mano
+                let imagen = new Image();
+                imagen.src = "mano.jpg";
+                //cuando la imagen cargue
+                imagen.onload = function(){
+                    //dibujo la imagen en 0,0 en el canvas
+                    contexto.drawImage(imagen,0,0);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!-- creo el lienzo -->
+        <canvas width=512 height=512 id="lienzo"></canvas>
+        
+    </body>
+</html>

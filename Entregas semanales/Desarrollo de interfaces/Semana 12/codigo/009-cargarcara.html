@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            //cuando el programa cargue
+            window.onload = function(){
+                //Patrones
+                var patrones = []
+                //En el componente 0 cargo la imagen de la linea vertical
+                patrones[0] = new Image();
+                patrones[0].src = "vertical.png";
+                //En el componente 1 cargo la imagen de la linea horizontal
+                patrones[1] = new Image();
+                patrones[1].src = "horizontal.png";
+                //Creo estas variables para contar los patrones verticales y horizontales
+                var cuentapatrones = []
+                cuentapatrones[0] = 0
+                cuentapatrones[1] = 0
+                
+                //CONTEXTOS
+                //creo el contexto del lienzo 1
+                var contexto = document.getElementById("lienzo").getContext("2d");
+                //creo el contexto del lienzo 2
+                var contexto2 = document.getElementById("lienzo2").getContext("2d");
+                //creo el contexto del lienzo 3
+                var contexto3 = document.getElementById("lienzo3").getContext("2d");
+                //creo los contextos de las referencias
+                var contextovertical = document.getElementById("lienzovertical").getContext("2d");
+                var contextohorizontal = document.getElementById("lienzohorizontal").getContext("2d");
+                
+                
+                //cargo la imagen del cuadrado en memoria de Javascript
+                let imagen = new Image();
+                imagen.src = "cara.jpg";
+                
+                //cuando la imagen cargue
+                imagen.onload = function(){
+                    //Pinto las referencias
+                    contextovertical.drawImage(patrones[0],0,0)
+                    contextohorizontal.drawImage(patrones[1],0,0)
+                    // Pinto la imagen original en 0,0 en el lienzo 1
+                    contexto.drawImage(imagen,0,0);
+                    
+                    // DETECTAR BORDES EN LA IMAGEN
+                    
+                    //Cargamos la imagen 1 en memoria
+                    let imagenlienzo1 = contexto.getImageData(0,0,512,512);
+                    // Cargamos la imagen 2 en memoria
+                    let imagenlienzo2 = contexto2.getImageData(0,0,512,512);
+                    
+                    //Iteramos en los pixeles de la imagen 1 por 1 (4 por que son los valores rgba)
+                    for(let i = 0;i<imagenlienzo1.data.length;i+=4){
+                        //diferencia solo en el canal rojo - con pixel de la derecha - horizontal
+                        let diferencia = Math.abs(imagenlienzo1.data[i] - imagenlienzo1.data[i+4])
+                        //diferencia con el pixel de abajo - vertical
+                        let diferencia2 = Math.abs(imagenlienzo1.data[i] - imagenlienzo1.data[i+512*4])
+                        // si la diferencia es notable
+                        if(diferencia > 10 || diferencia2 > 10){
+                            //pinta un pixel negro
+                            imagenlienzo2.data[i] = 0;
+                            imagenlienzo2.data[i+1] = 0;
+                            imagenlienzo2.data[i+2] = 0;
+                            imagenlienzo2.data[i+3] = 255;
+                        //en caso contrario, si no hay diferencia
+                        }else{
+                            //pinta un pixel blanco
+                            imagenlienzo2.data[i] = 255;
+                            imagenlienzo2.data[i+1] = 255;
+                            imagenlienzo2.data[i+2] = 255;
+                            imagenlienzo2.data[i+3] = 255;
+                        }
+                    }
+                    //Pinta la imagen final en el lienzo 2
+                    contexto2.putImageData(imagenlienzo2,0,0); 
+                    
+                    //Recorro esta imagen para detectar que pixeles son verticales
+                    let muestravertical = contextovertical.getImageData(0,0,8,8)
+                    //Para cada uno de los pixeles en horizontal
+                    for(let x= 0;x<512;x++){
+                        //en vertical
+                        for(let y= 0;y<512;y++){
+                            //recorro la imagen vertical - es 8x8, por eso 8,8
+                            let trozo = contexto2.getImageData(x,y,8,8)
+                            let suma = 0;
+                            //recorro cada pixel del cuadrito vertical
+                            for(let i = 0;i<trozo.data.length;i+=4){
+                                suma += Math.abs(trozo.data[i] - muestravertical.data[i])
+                            }
+                            //cada vez que detecte una linea
+                            if(suma < 4000){
+                                //añade uno mas a cuenta patrones
+                                cuentapatrones[0]++;
+                                //en ese caso pinta en rojo
+                                contexto3.fillStyle = "red";
+                                contexto3.fillRect(x,y,2,2)
+                            }
+                        }
+                    }
+                    
+                    //Recorro esta imagen para detectar que pixeles son horizontales
+                    let muestrahorizontal = contextohorizontal.getImageData(0,0,8,8)
+                    //Para cada uno de los pixeles
+                    //en horizontal
+                    for(let x= 0;x<512;x++){
+                        //en vertical
+                        for(let y= 0;y<512;y++){
+                            //recorro la imagen horizontal - es 8x8, por eso 8,8
+                            let trozo = contexto2.getImageData(x,y,8,8)
+                            let suma = 0;
+                            //recorro cada pixel del cuadrito vertical
+                            for(let i = 0;i<trozo.data.length;i+=4){
+                                suma += Math.abs(trozo.data[i] - muestrahorizontal.data[i])
+                            }
+                            //si detecta una linea
+                            if(suma < 4000){
+                                //añade uno mas a cuenta patrones
+                                cuentapatrones[1]++;
+                                //en ese caso pinta en azul
+                                contexto3.fillStyle = "blue";
+                                contexto3.fillRect(x,y,2,2)
+                            }
+                        }
+                    }
+                    //me dirá cuantos patrones tengo en vertical y horizontal
+                    console.log(cuentapatrones)
+                }
+            }
+        </script>
+        <style>
+            /* ESTILO DEL CANVAS PARA QUE SALGAN MARCADOS */
+            canvas{border:1px solid black;}
+        </style>
+    </head>
+    <body>
+        <!-- creo los lienzos -->
+        <canvas width=512 height=512 id="lienzo"></canvas>
+        <canvas width=512 height=512 id="lienzo2"></canvas>
+        <canvas width=512 height=512 id="lienzo3"></canvas>
+        <!-- creo dos pequeños lienzos para las lineas verticales y horizontales -->
+        <canvas width=8 height=8 id="lienzovertical"></canvas>
+        <canvas width=8 height=8 id="lienzohorizontal"></canvas>
+        
+    </body>
+</html>
