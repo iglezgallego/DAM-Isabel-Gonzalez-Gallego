@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <title>Chat</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <!-- Sección principal de la página -->
+    <main>
+        <!-- Sección para mostrar los mensajes -->
+        <section id="mensajes">
+            Mensajes
+        </section>
+        <!-- Sección con un campo de entrada de texto para escribir mensajes -->
+        <section>
+            <input type="text" id="mensaje">
+        </section>
+    </main>
+
+    <!-- Script de JavaScript para la funcionalidad del chat -->
+    <script>
+        //Asigna un evento onkeydown al campo de entrada de texto con el ID "mensaje"
+        document.getElementById("mensaje").onkeydown = function(e){
+            // Verifica si la tecla presionada es Enter
+            if(e.key == "Enter"){
+                console.log("Has pulsado enter");
+                //Obtiene el valor del campo de entrada de texto
+                var mensaje = this.value;
+                //Realiza una solicitud fetch para enviar el mensaje al servidor
+                fetch("/envia?mensaje=" + mensaje);
+                //Limpia el campo de entrada de texto después de enviar el mensaje
+                document.getElementById("mensaje").value = "";
+            } 
+        }
+
+        //Establece un temporizador que llama a la función 'recibe' después de 1000 milisegundos (1 segundo)
+        var temporizador = setTimeout("recibe()", 1000);
+
+        //Función que se ejecutará para recibir mensajes del servidor
+        function recibe(){
+            console.log("recibo mensajes");
+
+            //Realiza una solicitud fetch para obtener mensajes del servidor
+            fetch("/recibe")
+                .then(function(response){
+                    //Convierte la respuesta a formato JSON
+                    return response.json();
+                })
+                .then(function(response){
+                    //Muestra la respuesta en la consola
+                    console.log(response);
+                    //Limpia el contenido de la sección de mensajes
+                    document.getElementById("mensajes").innerHTML = "";
+                    //Itera a través de los mensajes en la respuesta y los agrega a la sección de mensajes
+                    for(var i = 0; i < response.length; i++){
+                        document.getElementById("mensajes").innerHTML += response[i].mensaje + "<br>";
+                    }
+                });
+
+            //Limpia el temporizador actual
+            clearTimeout(temporizador);
+
+            //Establece un nuevo temporizador para llamar a la función 'recibe' después de 1000 milisegundos (1 segundo)
+            temporizador = setTimeout("recibe()", 1000);
+        }
+    </script>
+</body>
+</html>
