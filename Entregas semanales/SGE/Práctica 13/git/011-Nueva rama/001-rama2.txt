@@ -1,0 +1,25 @@
+//creo rama
+git branch bucle
+
+//cambio rama
+git checkout bucle
+
+---MODIFICO EL CODIGO FUENTE DEL PROYECTO ----
+
+//Añado
+git add piedrapapelotijera.py
+
+//Hago commit
+git commit -m "Creacion de bucle"
+
+//Hago push en la nueva rama
+git push origin bucle
+
+//Salto a la rama principal
+git checkout main
+
+//Añado los cambios realizados a la rama principal
+git merge bucle
+
+//Hago el push a la rama principal
+git push origin main

@@ -1,0 +1,3 @@
+//Hacer un pull para pasar el repositorio (rama main) del servidor de Github al ordenador
+
+git pull origin main

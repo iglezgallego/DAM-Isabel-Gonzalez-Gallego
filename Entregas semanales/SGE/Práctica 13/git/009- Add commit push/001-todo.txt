@@ -1,0 +1,7 @@
+//Añado
+git add piedrapapelotijera.py
+//Hago commit
+git commit -m "Comprobación de ganador"
+
+//Hago un push - Aquí cambio la rama donde estoy trabajando
+git push origin ganador

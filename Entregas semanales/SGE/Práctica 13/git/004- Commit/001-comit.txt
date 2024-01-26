@@ -1,0 +1,8 @@
+//Hacer un commit pero solo en local, no se suben al servidor
+
+git commit -m "Primera versión del proyecto"
+
+//Antes de hacer un nuevo commit tengo que hacer un add del archivo con el que estoy trabajando
+
+git add piedrapapelotijera.py
+git commit -m "Segunda versión - Decimos que saca el ordenador"

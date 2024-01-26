@@ -1,0 +1,9 @@
+
+//Primero salto a la rama principal
+git checkout main
+
+//Añado los cambios realizados a la rama principal
+git merge ganador
+
+//Hago el push a la rama principal
+git push origin main

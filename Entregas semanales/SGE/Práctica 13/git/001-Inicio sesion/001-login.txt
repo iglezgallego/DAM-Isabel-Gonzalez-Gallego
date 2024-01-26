@@ -1,0 +1,5 @@
+//Inicio sesion en mi cuenta de github
+
+git config --global user.name = "iglezgallego"
+
+git config --global user.email = "iglezgallego@gmail.com"

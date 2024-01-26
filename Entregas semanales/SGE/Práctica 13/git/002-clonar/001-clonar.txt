@@ -1,0 +1,3 @@
+ //Clonar - Cojo todo lo que tengo en el servidor y lo bajo a mi ordenador
+ 
+ git clone https://github.com/iglezgallego/piedrapapelytijera

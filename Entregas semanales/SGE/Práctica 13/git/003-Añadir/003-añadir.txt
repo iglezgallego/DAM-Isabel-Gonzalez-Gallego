@@ -1,0 +1,3 @@
+//Añadir ese archivo para que detecte los cambios que se han producido para el posible commit
+
+git add piedrapapelotijera.py

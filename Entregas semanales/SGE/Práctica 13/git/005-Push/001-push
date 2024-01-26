@@ -1,0 +1,4 @@
+//Hago un push en el servidor de gitHub
+//Tengo que decir el nombre de la rama donde voy a subir el archivo, en este caso la rama main
+
+git push origin main
